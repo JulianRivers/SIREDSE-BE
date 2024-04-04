@@ -1,6 +1,6 @@
 # SIREDSE-BE
 
-proyecto hecho en base a microservicios con springboot, JWT y postgreSQL
+Este es el backend hecho en base a microservicios con springboot, JWT y postgreSQL del aplicativo web para gestionar los semilleros de la UFPS semillero de invetigacion.
 
 ###  registro   
 POST localhost:6060/auth/signup
