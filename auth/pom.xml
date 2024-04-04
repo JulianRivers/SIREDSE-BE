@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>Backend-Siadse-Ufps</groupId>
-	<artifactId>siadse</artifactId>
+	<artifactId>auth</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>siadse</name>
 	<description>Aplicacion web y mobile para el semiller de redes y
