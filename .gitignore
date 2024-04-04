@@ -1,6 +1,4 @@
-.\auth\src\main\resources\application.properties
-.\file-system\src\main\resources\application.properties
-.\pqrs\src\main\resources\application.properties
+application.properties
 
 HELP.md
 target/

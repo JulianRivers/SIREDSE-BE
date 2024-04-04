@@ -13,10 +13,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import BackendSiadseUfps.siadse.service.JWTUtils;
 import BackendSiadseUfps.siadse.service.OurUserDetailsService;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 @Component
 public class JWTAuthFIlter extends OncePerRequestFilter {
