@@ -28,7 +28,7 @@ public class PQRSService implements IPQRSService {
 
     @Autowired
     TipoPQRSRepo tipoPQRSRepo;
-    
+
 
     @Override
     public PQRSDTO createPQRS(PQRSDTO pqrsDTO, Integer semilleroID, Integer tipoPQRSID){

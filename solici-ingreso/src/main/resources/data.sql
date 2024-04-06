@@ -1,0 +1,47 @@
+
+CREATE TABLE IF NOT EXISTS ourusers (
+                                        id SERIAL PRIMARY KEY,
+                                        email VARCHAR(255) NOT NULL,
+                                        password VARCHAR(255) NOT NULL,
+                                        direccion_residencia VARCHAR(255) NOT NULL,
+                                        codigo_universidad VARCHAR(85) NOT NULL,
+                                        celular VARCHAR(255) NOT NULL,
+                                        role VARCHAR(255) NOT NULL,
+                                        semestre_actual INT NOT NULL,
+                                        edad INT NOT NULL,
+                                        director_semilleros BOOLEAN NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS semillero (
+                                         id SERIAL PRIMARY KEY,
+                                         name VARCHAR(255) NOT NULL,
+                                         descripcion VARCHAR(255) NOT NULL,
+                                         logo VARCHAR(255) NOT NULL,
+                                         id_grupo INT NOT NULL,
+                                         id_lider INT NOT NULL,
+                                         linea_investigacion INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS lineas_de_investigacion (
+    id SERIAL PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS estados_solicitud (
+    id SERIAL PRIMARY KEY,
+    estado VARCHAR(255)
+);
+
+INSERT INTO ourusers (email, password, direccion_residencia, codigo_universidad, celular, role, semestre_actual, edad, director_semilleros)
+VALUES
+    ('admin@ufps.co', '$2a$12$Yq/jTiLjSYdtqU3vBg/MiuVM3kVtA6EWfaOvxYZ6IkXdzeUjCi7nO', 'cucuta calle 2', '1151743', '3133713137', 'ADMIN', 10, 23, false),
+    ('jonnyjaimes@ufps.co', '$2a$12$Yq/jTiLjSYdtqU3vBg/MiuVM3kVtA6EWfaOvxYZ6IkXdzeUjCi7nO', 'cucuta calle 2', '1151743', '3133713137', 'USER', 10, 23, false);
+
+INSERT INTO semillero (name, descripcion, logo, id_grupo, id_lider, linea_investigacion)
+VALUES
+    ('SIADSE', 'REDES', 'FOTOREDES', 1, 1 , 1);
+
+INSERT INTO estados_solicitud (estado)
+VALUES
+    ('PENDIENTE'),
+    ('REVISION'),
+    ('RESUELTO');
