@@ -37,7 +37,7 @@ public class PQRSService implements IPQRSService {
         TiposPQRS tiposPQRS = tipoPQRSRepo.findById(tipoPQRSID).orElse(null);
         if (tiposPQRS == null)
             throw new IllegalArgumentException("Ese tipo de PQRS no existe");
-        EstadosPQRS estado = estPQRSRepo.findByEstado("Pendiente");
+        EstadosPQRS estado = estPQRSRepo.findByEstado("PENDIENTE");
         Semillero semillero = semilleroRepo.findById(semilleroID).orElse(null);
         if (semillero == null)
             throw new IllegalArgumentException("Semillero no existe");
@@ -92,17 +92,16 @@ public class PQRSService implements IPQRSService {
         switch (nuevoEstadoID) {
 
             case 2:
-                if (!pqrs.getEstadoRadicado().getEstado().equals("Revision")) {
-                    throw new IllegalArgumentException(
-                            "No se puede dar por resuelto este PQRS si no está en revisión");
+            if (!pqrs.getEstadoRadicado().getEstado().equals("PENDIENTE")) {
+                throw new IllegalArgumentException(
+                        "No se puede revisar este PQRS si no está en pendiente");
                 }
                 break;
 
             case 3:
-
-                if (!pqrs.getEstadoRadicado().getEstado().equals("Pendiente")) {
+                if (!pqrs.getEstadoRadicado().getEstado().equals("REVISION")) {
                     throw new IllegalArgumentException(
-                            "No se puede revisar este PQRS si no está en pendiente");
+                            "No se puede dar por resuelto este PQRS si no está en revisión");
                 }
                 break;
 

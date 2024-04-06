@@ -34,7 +34,7 @@ public class PQRSAdminController {
     public Response reviewPQRS(@RequestParam Integer pqrsId) {
         Response response = new Response();
         try {
-            pqrsService.cambioEstadoPQRS(pqrsId, 3);
+            pqrsService.cambioEstadoPQRS(pqrsId, 2);
             response.setMessage("PQRS pasada a Revision");
         } catch (IllegalArgumentException e) {
             response.setMessage("Error cambiando el estado: " + e.getMessage());
@@ -47,7 +47,7 @@ public class PQRSAdminController {
     public Response finishPQRS(@RequestParam Integer pqrsId) {
         Response response = new Response();
         try {
-            pqrsService.cambioEstadoPQRS(pqrsId, 2);
+            pqrsService.cambioEstadoPQRS(pqrsId, 3);
             response.setMessage("PQRS Resuelta");
         } catch (IllegalArgumentException e) {
             response.setMessage("Error cambiando el estado: " + e.getMessage());
