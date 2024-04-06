@@ -48,7 +48,6 @@ public class PQRS {
     @JoinColumn(name = "id_semillero", nullable = false)
     private Semillero semillero;
 
-    @NotNull(message = "codigoRadicado cannot be null")
     private String codigoRadicado;
 
 }

@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS ourusers;
-DROP TABLE IF EXISTS semillero;
-DROP TABLE IF EXISTS estados_pqrs;
-DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS tipos_pqrs;
-DROP TABLE IF EXISTS cambio_estado_radicado;
 DROP TABLE IF EXISTS lineas_investigacion;
+DROP TABLE IF EXISTS cambio_estado_radicado;
+DROP TABLE IF EXISTS pqrs;
+DROP TABLE IF EXISTS estados_pqrs;
+DROP TABLE IF EXISTS tipos_pqrs;
+DROP TABLE IF EXISTS semillero;
 
 CREATE TABLE IF NOT EXISTS ourusers (
     id SERIAL PRIMARY KEY,
@@ -29,6 +29,9 @@ CREATE TABLE IF NOT EXISTS semillero (
     linea_investigacion INT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS lineas_de_investigacion (
+    id SERIAL PRIMARY KEY
+);
 
 CREATE TABLE IF NOT EXISTS estados_pqrs (
     id SERIAL PRIMARY KEY,
@@ -39,6 +42,36 @@ CREATE TABLE IF NOT EXISTS tipos_pqrs (
    id SERIAL PRIMARY KEY,
    tipo VARCHAR(255)
 );
+
+CREATE TABLE IF NOT EXISTS cambio_estado_radicado(
+   id SERIAL PRIMARY KEY,
+   fecha_cambio DATE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS pqrs (
+   id SERIAL PRIMARY KEY,
+   anonimo BOOLEAN NOT NULL,
+   fecha_radicado DATE,
+   apellido VARCHAR(255),
+   nombre VARCHAR(255),
+   cedula VARCHAR(255),
+   correo VARCHAR(255) NOT NULL,
+   codigo_radicado VARCHAR(255) NOT NULL,
+   titulo VARCHAR(255) NOT NULL,
+   descripcion VARCHAR(255) NOT NULL
+);
+
+ALTER TABLE pqrs
+    ADD COLUMN id_estados INT NOT NULL,
+    ADD CONSTRAINT fk_estados_id FOREIGN KEY (id_estados) REFERENCES estados_pqrs (id),
+    ADD COLUMN id_tipo_pqrs INT NOT NULL,
+    ADD CONSTRAINT fk_tipopqrs_id FOREIGN KEY (id_tipo_pqrs) REFERENCES tipos_pqrs (id);
+
+ALTER TABLE cambio_estado_radicado
+    ADD COLUMN id_estados INT NOT NULL,
+    ADD CONSTRAINT fk_estados_id FOREIGN KEY (id_estados) REFERENCES estados_pqrs (id),
+    ADD COLUMN id_pqrs INT NOT NULL,
+    ADD CONSTRAINT fk_pqrs_id FOREIGN KEY (id_pqrs) REFERENCES pqrs (id);
 
 INSERT INTO ourusers (email, password, direccion_residencia, codigo_universidad, celular, role, semestre_actual, edad, director_semilleros)
 VALUES
