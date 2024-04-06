@@ -1,4 +1,13 @@
 
+DROP TABLE IF EXISTS lineas_investigacion;
+DROP TABLE IF EXISTS solicitud_ingreso_semillero CASCADE;
+DROP TABLE IF EXISTS cambio_estado_solicitud;
+DROP TABLE IF EXISTS semillero;
+DROP TABLE IF EXISTS ourusers;
+DROP TABLE IF EXISTS estados_solicitud CASCADE ;
+
+
+
 CREATE TABLE IF NOT EXISTS ourusers (
                                         id SERIAL PRIMARY KEY,
                                         email VARCHAR(255) NOT NULL,
@@ -22,6 +31,17 @@ CREATE TABLE IF NOT EXISTS semillero (
                                          linea_investigacion INT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS solicitud_ingreso_semillero (
+    id SERIAL PRIMARY KEY,
+    fecha_actualizacion DATE NOT NULL,
+    fecha_creacion DATE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS cambio_estado_solicitud (
+    id SERIAL PRIMARY KEY,
+    fecha_cambio DATE NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS lineas_de_investigacion (
     id SERIAL PRIMARY KEY
 );
@@ -30,6 +50,20 @@ CREATE TABLE IF NOT EXISTS estados_solicitud (
     id SERIAL PRIMARY KEY,
     estado VARCHAR(255)
 );
+
+ALTER TABLE solicitud_ingreso_semillero
+    ADD COLUMN id_ourusers INT NOT NULL,
+    ADD CONSTRAINT fk_ourusers_id FOREIGN KEY (id_ourusers) REFERENCES ourusers (id),
+    ADD COLUMN id_estados INT NOT NULL,
+    ADD CONSTRAINT fk_estados_id FOREIGN KEY (id_estados) REFERENCES estados_solicitud (id),
+    ADD COLUMN id_semillero INT NOT NULL,
+    ADD CONSTRAINT fk_semillero_id FOREIGN KEY (id_semillero) REFERENCES semillero (id);
+
+ALTER TABLE cambio_estado_solicitud
+    ADD COLUMN id_estados INT NOT NULL,
+    ADD CONSTRAINT fk_estados_id FOREIGN KEY (id_estados) REFERENCES estados_solicitud (id),
+    ADD COLUMN id_solicitud INT NOT NULL,
+    ADD CONSTRAINT fk_solicitud_id FOREIGN KEY (id_solicitud) REFERENCES solicitud_ingreso_semillero (id);
 
 INSERT INTO ourusers (email, password, direccion_residencia, codigo_universidad, celular, role, semestre_actual, edad, director_semilleros)
 VALUES
@@ -43,5 +77,5 @@ VALUES
 INSERT INTO estados_solicitud (estado)
 VALUES
     ('PENDIENTE'),
-    ('REVISION'),
-    ('RESUELTO');
+    ('RECHAZADO'),
+    ('APROBADO');

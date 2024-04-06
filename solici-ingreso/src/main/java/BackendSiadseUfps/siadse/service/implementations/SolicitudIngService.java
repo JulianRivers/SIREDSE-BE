@@ -37,7 +37,7 @@ public class SolicitudIngService implements ISolicitudIngService {
 
         SolicitudIngresoSemillero solicitudIngresoSemillero = new SolicitudIngresoSemillero();
 
-        EstadosSoli estado = estadosSoliRepo.findByEstado("pendiente");
+        EstadosSoli estado = estadosSoliRepo.findByEstado("PENDIENTE");
         OurUsers ourUsers = ourUserRepo.findById(userID).orElse(null);
         if (ourUsers == null)
             throw new IllegalArgumentException("Usuario no existe");
@@ -86,8 +86,8 @@ public class SolicitudIngService implements ISolicitudIngService {
 
         switch (nuevoEstadoID) {
 
-            case 1:
-                if (!solicitudIngresoSemillero.getEstado().getEstado().equals("Pendiente")) {
+            case 2:
+                if (!solicitudIngresoSemillero.getEstado().getEstado().equals("PENDIENTE")) {
                     throw new IllegalArgumentException(
                             "No se puede rechazar esta solicitud si no está Pendiente");
                 }
@@ -95,7 +95,7 @@ public class SolicitudIngService implements ISolicitudIngService {
 
             case 3:
 
-                if (!solicitudIngresoSemillero.getEstado().getEstado().equals("Pendiente")) {
+                if (!solicitudIngresoSemillero.getEstado().getEstado().equals("PENDIENTE")) {
                     throw new IllegalArgumentException(
                             "No se puede Aprobar esta solicitud si no está en pendiente");
                 }
