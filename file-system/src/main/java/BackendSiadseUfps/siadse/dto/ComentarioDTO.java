@@ -1,0 +1,22 @@
+package BackendSiadseUfps.siadse.dto;
+
+import BackendSiadseUfps.siadse.entity.ContenidoMultimedia;
+import BackendSiadseUfps.siadse.entity.OurUsers;
+import lombok.*;
+import java.util.Date;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ComentarioDTO {
+    private Integer id;
+
+    private String comentario;
+
+    private ContenidoMultimedia contenidoMultimedia;
+
+    private Date fechaCreacion;
+
+    private Integer userId;
+}

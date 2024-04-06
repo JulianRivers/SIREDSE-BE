@@ -30,4 +30,6 @@ public class Album {
 
     private Date fechaActualizacion;
 
+    private String ubicacionS3;
+
 }

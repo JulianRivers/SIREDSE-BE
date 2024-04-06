@@ -1,4 +1,4 @@
-package BackendSiadseUfps.siadse.service;
+package BackendSiadseUfps.siadse.service.implementations;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
