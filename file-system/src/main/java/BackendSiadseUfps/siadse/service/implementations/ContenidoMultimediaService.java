@@ -41,6 +41,11 @@ public class ContenidoMultimediaService implements ContenidoMultimediaServiceInt
         contenidoMultimedia.setFechaSubida(new Date());
         contenidoMultimedia.setKeyFile(keyFile);
         contenidoMultimedia.setAlbum(album);
+
+        String fileName = file.getOriginalFilename();
+        String formato = obtenerFormatoArchivo(fileName);
+        contenidoMultimedia.setFormato(formato);
+
         ContenidoMultimedia savedContenidoMultimedia = contenidoMultimediaRepository.save(contenidoMultimedia);
 
         savedContenidoMultimedia.setUrl(awss3Service.getFileUrl(keyFile));
@@ -54,5 +59,13 @@ public class ContenidoMultimediaService implements ContenidoMultimediaServiceInt
         responseDTO.setAlbumId(albumId);
         BeanUtils.copyProperties(savedContenidoMultimedia, responseDTO);
         return responseDTO;
+    }
+
+    private String obtenerFormatoArchivo(String fileName) {
+        int index = fileName.lastIndexOf('.');
+        if (index > 0) {
+            return fileName.substring(index + 1);
+        }
+        return "";
     }
 }

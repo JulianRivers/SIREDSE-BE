@@ -21,7 +21,7 @@ POST localhost:6060/auth/signin
     "name": "jonnyadmin",
     "email": "admin@ufps.co",
     "password": "ufps2023",
-    "role": "Admin",
+    "role": "ADMIN",
     "codigoUniversidad": "1151743",
     "semestreActual":10,
     "edad": 23,
