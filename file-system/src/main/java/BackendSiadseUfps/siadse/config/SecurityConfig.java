@@ -1,6 +1,6 @@
 package BackendSiadseUfps.siadse.config;
 
-import BackendSiadseUfps.siadse.service.OurUserDetailsService;
+import BackendSiadseUfps.siadse.service.implementations.OurUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

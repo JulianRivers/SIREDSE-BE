@@ -65,6 +65,87 @@ public class OurUsers implements UserDetails {
         return authorities;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getCodigoUniversidad() {
+        return codigoUniversidad;
+    }
+
+    public void setCodigoUniversidad(String codigoUniversidad) {
+        this.codigoUniversidad = codigoUniversidad;
+    }
+
+    public Integer getSemestreActual() {
+        return semestreActual;
+    }
+
+    public void setSemestreActual(Integer semestreActual) {
+        this.semestreActual = semestreActual;
+    }
+
+    public Integer getEdad() {
+        return edad;
+    }
+
+    public void setEdad(Integer edad) {
+        this.edad = edad;
+    }
+
+    public String getDireccionResidencia() {
+        return direccionResidencia;
+    }
+
+    public void setDireccionResidencia(String direccionResidencia) {
+        this.direccionResidencia = direccionResidencia;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public boolean isDirectorSemilleros() {
+        return directorSemilleros;
+    }
+
+    public void setDirectorSemilleros(boolean directorSemilleros) {
+        this.directorSemilleros = directorSemilleros;
+    }
+
     @Override
     public String getUsername() {
         return email;

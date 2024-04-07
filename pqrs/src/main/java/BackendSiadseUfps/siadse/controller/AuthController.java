@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import BackendSiadseUfps.siadse.dto.ReqRes;
-import BackendSiadseUfps.siadse.service.AuthService;
+import BackendSiadseUfps.siadse.service.implementations.AuthService;
 
 @RestController
 @RequestMapping("/auth")

@@ -22,6 +22,47 @@ public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public ContenidoMultimedia getContenidoMultimedia() {
+        return contenidoMultimedia;
+    }
+
+    public void setContenidoMultimedia(ContenidoMultimedia contenidoMultimedia) {
+        this.contenidoMultimedia = contenidoMultimedia;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public OurUsers getUser() {
+        return user;
+    }
+
+    public void setUser(OurUsers user) {
+        this.user = user;
+    }
+
     /**
      * comentario realizado por el usuario al contenido multimedia
      */
