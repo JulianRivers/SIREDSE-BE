@@ -26,8 +26,8 @@ public class AwsS3Controller {
     private AWSS3ServiceInterface awss3Service;
 
     @PostMapping(value = "/upload")
-    public ResponseEntity<String> uploadFile(@RequestPart(value="file") MultipartFile file) {
-        awss3Service.uploadFile(file);
+    public ResponseEntity<String> uploadFile(@RequestPart(value="file") MultipartFile file, String ruta) {
+        awss3Service.uploadFile(file, ruta);
         String response = "El archivo "+file.getOriginalFilename()+" fue cargado correctamente a S3";
         return new ResponseEntity<String>(response, HttpStatus.OK);
     }

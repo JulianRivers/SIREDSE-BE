@@ -1,4 +1,5 @@
 package BackendSiadseUfps.siadse.service.implementations;
+import BackendSiadseUfps.siadse.dto.ContenidoMutimediaDTO;
 import BackendSiadseUfps.siadse.entity.Album;
 import BackendSiadseUfps.siadse.service.interfaces.AWSS3ServiceInterface;
 import com.amazonaws.services.s3.AmazonS3;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,19 +32,26 @@ public class AWSS3Service implements AWSS3ServiceInterface {
     private String bucketName;
 
     @Override
-    public void uploadFile(MultipartFile file) {
+    public ContenidoMutimediaDTO uploadFile(MultipartFile file, String ruta) {
         String fileName = file.getOriginalFilename();
         File mainFile = new File(fileName);
         try (FileOutputStream stream = new FileOutputStream(mainFile)) {
             stream.write(file.getBytes());
-            String newFileName = System.currentTimeMillis() + "_" + fileName;
+            String newFileName = ruta + "/" + System.currentTimeMillis() + "_" + fileName; // Concatenar la ruta personalizada
             LOGGER.info("Subiendo archivo con el nombre... " + newFileName);
             PutObjectRequest request = new PutObjectRequest(bucketName, newFileName, mainFile);
             amazonS3.putObject(request);
+            ContenidoMutimediaDTO contenidoMultimediaDTO = new ContenidoMutimediaDTO();
+            contenidoMultimediaDTO.setTitulo(fileName);
+            contenidoMultimediaDTO.setUrl(getFileUrl(newFileName));
+            contenidoMultimediaDTO.setKeyFile(newFileName);
+            return contenidoMultimediaDTO;
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
+            return null;
         }
     }
+
 
     @Override
     public List<String> getObjectsFromS3() {

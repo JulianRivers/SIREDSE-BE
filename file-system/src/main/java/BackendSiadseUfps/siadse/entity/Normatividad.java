@@ -32,10 +32,6 @@ public class Normatividad {
     @JoinColumn(name = "id_semillero")
     private Semillero semillero;
 
-    @ManyToOne
-    @JoinColumn(name = "id_album", nullable = false)
-    private Album album;
-
     public Integer getId() {
         return id;
     }
@@ -84,11 +80,11 @@ public class Normatividad {
         this.formato = formato;
     }
 
-    public Album getAlbum() {
-        return album;
+    public Semillero getSemillero() {
+        return semillero;
     }
 
-    public void setAlbum(Album album) {
-        this.album = album;
+    public void setSemillero(Semillero semillero) {
+        this.semillero = semillero;
     }
 }

@@ -30,4 +30,19 @@ public class SemilleroController {
     public ResponseEntity<List<SemilleroDTO>> listSeedbed() {
         throw new UnsupportedOperationException("La funcionalidad aún no está implementada");
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<SemilleroDTO> getSeedbeb(@PathVariable Integer id) {
+        throw new UnsupportedOperationException("La funcionalidad aún no está implementada");
+    }
+
+    @PutMapping
+    public ResponseEntity<List<SemilleroDTO>> updateSeedbed() {
+        throw new UnsupportedOperationException("La funcionalidad aún no está implementada");
+    }
+
+    @DeleteMapping
+    public ResponseEntity<List<SemilleroDTO>> deleteSeedbed() {
+        throw new UnsupportedOperationException("La funcionalidad aún no está implementada");
+    }
 }
