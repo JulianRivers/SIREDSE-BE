@@ -1,28 +1,13 @@
-package BackendSiadseUfps.siadse.entity;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+package BackendSiadseUfps.siadse.dto;
 import java.util.Date;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Table(name = "album")
-public class Album {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+public class SemilleroDTO {
+
     private Integer id;
 
-    @NotNull(message = "titulo cannot be null")
-    private String titulo;
+    private String nombre;
 
     private String descripcion;
 
@@ -30,7 +15,16 @@ public class Album {
 
     private Date fechaActualizacion;
 
-    private String ubicacionS3;
+    public SemilleroDTO() {
+    }
+
+    public SemilleroDTO(Integer id, String nombre, String descripcion, Date fechaCreacion, Date fechaActualizacion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaActualizacion = fechaActualizacion;
+    }
 
     public Integer getId() {
         return id;
@@ -40,12 +34,12 @@ public class Album {
         this.id = id;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getDescripcion() {
@@ -70,13 +64,5 @@ public class Album {
 
     public void setFechaActualizacion(Date fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
-    }
-
-    public String getUbicacionS3() {
-        return ubicacionS3;
-    }
-
-    public void setUbicacionS3(String ubicacionS3) {
-        this.ubicacionS3 = ubicacionS3;
     }
 }

@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import BackendSiadseUfps.siadse.dto.ReqRes;
 import BackendSiadseUfps.siadse.entity.Semillero;
-import BackendSiadseUfps.siadse.repository.SemilleroRepo;
+import BackendSiadseUfps.siadse.repository.SemilleroRepository;
 
 
 @RestController
 public class AdminUsers {
 
     @Autowired
-    private SemilleroRepo semilleroRepo;
+    private SemilleroRepository semilleroRepository;
 
     @GetMapping("/public/semilleros")
     public ResponseEntity<Object> getAllProducts(){
-        return ResponseEntity.ok(semilleroRepo.findAll());
+        return ResponseEntity.ok(semilleroRepository.findAll());
     }
 
     @PostMapping("/admin/guardarsemillero")
     public ResponseEntity<Object> signUp(@RequestBody ReqRes productRequest){
         Semillero productToSave = new Semillero();
-        productToSave.setName(productRequest.getName());
-        return ResponseEntity.ok(semilleroRepo.save(productToSave));
+        productToSave.setNombre(productRequest.getName());
+        return ResponseEntity.ok(semilleroRepository.save(productToSave));
     }
 
 

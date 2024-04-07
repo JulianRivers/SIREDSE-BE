@@ -1,29 +1,40 @@
-package BackendSiadseUfps.siadse.dto;
+package BackendSiadseUfps.siadse.entity;
+
+
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.Date;
 
-@Data
-@Builder
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-public class ContenidoMutimediaDTO {
+@AllArgsConstructor
+@Entity
+@Table(name = "normatividad")
+public class Normatividad {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    /**
-     * nombre como se guardara el archivo multimedia
-     */
 
     private String titulo;
-    /**
-     * fecha en la que se subio el archivo multimedia
-     */
+
     private Date fechaSubida;
 
-    /**
-     * url donde se encuentra el documento
-     */
-
+    @Column(nullable = true)
     private String url;
+
+    @Column(nullable = false)
+    private String keyFile;
+
+    private String formato;
+    @ManyToOne
+    @JoinColumn(name = "id_semillero")
+    private Semillero semillero;
+
+    @ManyToOne
+    @JoinColumn(name = "id_album", nullable = false)
+    private Album album;
 
     public Integer getId() {
         return id;
@@ -73,26 +84,11 @@ public class ContenidoMutimediaDTO {
         this.formato = formato;
     }
 
-    public Integer getAlbumId() {
-        return albumId;
+    public Album getAlbum() {
+        return album;
     }
 
-    public void setAlbumId(Integer albumId) {
-        this.albumId = albumId;
+    public void setAlbum(Album album) {
+        this.album = album;
     }
-
-    /**
-     * Key del archivo en el s3
-     */
-
-    private String keyFile;
-
-    /**
-     * Extensión del archivo subido
-     */
-
-    private String formato;
-
-
-    private Integer albumId;
 }
