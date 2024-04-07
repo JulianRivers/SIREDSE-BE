@@ -5,9 +5,12 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "solicitud_ingreso_semillero")
-public class SolicitudIngresoSemillero {
+@Table(name = "estados_solicitud")
+public class EstadosSoli {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    private String estado;
 }
