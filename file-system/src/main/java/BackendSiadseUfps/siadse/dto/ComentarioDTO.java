@@ -14,7 +14,7 @@ public class ComentarioDTO {
 
     private String comentario;
 
-    private ContenidoMultimedia contenidoMultimedia;
+    private Integer contenidoMultimediaId;
 
     private Date fechaCreacion;
 

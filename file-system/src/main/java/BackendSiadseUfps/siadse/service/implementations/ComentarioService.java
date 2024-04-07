@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ComentarioService implements ComentarioServiceInterface {
@@ -44,6 +46,7 @@ public class ComentarioService implements ComentarioServiceInterface {
 
         ComentarioDTO responseDTO = new ComentarioDTO();
         responseDTO.setUserId(savedComentario.getUser().getId());
+        responseDTO.setContenidoMultimediaId(savedComentario.getContenidoMultimedia().getId());
         BeanUtils.copyProperties(savedComentario, responseDTO);
 
         return responseDTO;
@@ -59,6 +62,7 @@ public class ComentarioService implements ComentarioServiceInterface {
         Comentario updatedComentario = comentarioRepository.save(existingComentario);
 
         ComentarioDTO responseDTO = new ComentarioDTO();
+        responseDTO.setContenidoMultimediaId(updatedComentario.getContenidoMultimedia().getId());
         BeanUtils.copyProperties(updatedComentario, responseDTO);
 
         return responseDTO;
@@ -70,5 +74,42 @@ public class ComentarioService implements ComentarioServiceInterface {
                 .orElseThrow(() -> new IllegalArgumentException("No se encontró el comentario con el ID especificado"));
 
         comentarioRepository.delete(comentario);
+    }
+
+
+    @Override
+    public List<ComentarioDTO> getAllComments() {
+        List<Comentario> comentarios = comentarioRepository.findAll();
+        return comentarios.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ComentarioDTO> getCommentsByMedia(Integer mediaId) {
+        ContenidoMultimedia media = contenidoMultimediaRepository.findById(mediaId)
+                .orElseThrow(() -> new IllegalArgumentException("No se encontró el archivo multimedia con el ID especificado"));
+        List<Comentario> comentarios = comentarioRepository.findByContenidoMultimedia(media);
+        return comentarios.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ComentarioDTO> getCommentsByUser(Integer userId) {
+        OurUsers user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("No se encontró el usuario con el ID especificado"));
+        List<Comentario> comentarios = comentarioRepository.findByUser(user);
+        return comentarios.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    private ComentarioDTO convertToDTO(Comentario comentario) {
+        ComentarioDTO comentarioDTO = new ComentarioDTO();
+        comentarioDTO.setContenidoMultimediaId(comentario.getContenidoMultimedia().getId());
+        comentarioDTO.setUserId(comentario.getUser().getId());
+        BeanUtils.copyProperties(comentario, comentarioDTO);
+        return comentarioDTO;
     }
 }

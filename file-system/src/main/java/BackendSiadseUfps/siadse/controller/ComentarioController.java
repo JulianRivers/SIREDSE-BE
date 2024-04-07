@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/public/comment")
 public class ComentarioController {
@@ -33,5 +35,23 @@ public class ComentarioController {
     public ResponseEntity<String> deleteComment(@RequestParam("id") Integer comentarioId) {
         comentarioService.deleteComment(comentarioId);
         return new ResponseEntity<>("Comentario borrado exitosamente", HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ComentarioDTO>> getAllComments() {
+        List<ComentarioDTO> comentarios = comentarioService.getAllComments();
+        return new ResponseEntity<>(comentarios, HttpStatus.OK);
+    }
+
+    @GetMapping("/media")
+    public ResponseEntity<List<ComentarioDTO>> getCommentsByMedia(@RequestParam("mediaId") Integer mediaId) {
+        List<ComentarioDTO> comentarios = comentarioService.getCommentsByMedia(mediaId);
+        return new ResponseEntity<>(comentarios, HttpStatus.OK);
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<List<ComentarioDTO>> getCommentsByUser(@RequestParam("userId") Integer userId) {
+        List<ComentarioDTO> comentarios = comentarioService.getCommentsByUser(userId);
+        return new ResponseEntity<>(comentarios, HttpStatus.OK);
     }
 }
