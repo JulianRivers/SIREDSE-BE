@@ -5,8 +5,8 @@ import BackendSiadseUfps.siadse.entity.Album;
 import BackendSiadseUfps.siadse.entity.ContenidoMultimedia;
 import BackendSiadseUfps.siadse.repository.AlbumRepository;
 import BackendSiadseUfps.siadse.repository.ContenidoMultimediaRepository;
-import BackendSiadseUfps.siadse.service.interfaces.AWSS3ServiceInterface;
-import BackendSiadseUfps.siadse.service.interfaces.ContenidoMultimediaServiceInterface;
+import BackendSiadseUfps.siadse.service.interfaces.AWSS3Service;
+import BackendSiadseUfps.siadse.service.interfaces.ContenidoMultimediaService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,15 +14,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class ContenidoMultimediaService implements ContenidoMultimediaServiceInterface {
+public class ContenidoMultimediaServiceImpl implements ContenidoMultimediaService {
 
     @Autowired
     private ContenidoMultimediaRepository contenidoMultimediaRepository;
 
     @Autowired
-    private AWSS3ServiceInterface awss3Service;
+    private AWSS3Service awss3Service;
 
     @Autowired
     private AlbumRepository albumRepository;
@@ -60,7 +62,31 @@ public class ContenidoMultimediaService implements ContenidoMultimediaServiceInt
         BeanUtils.copyProperties(savedContenidoMultimedia, responseDTO);
         return responseDTO;
     }
+    @Override
+    public List<ContenidoMutimediaDTO> getMediaContentByAlbum(Integer albumId) {
+        List<ContenidoMultimedia> contents = contenidoMultimediaRepository.findByAlbumId(albumId);
+        return contents.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
 
+    @Override
+    public void deleteMediaContent(Integer contenidoId) throws IOException {
+
+        ContenidoMultimedia contenidoMultimedia = contenidoMultimediaRepository.findById(contenidoId)
+                .orElseThrow(() -> new IllegalArgumentException("No se encontró el contenido multimedia con el ID especificado"));
+
+        awss3Service.deleteFile(contenidoMultimedia.getKeyFile());
+
+        contenidoMultimediaRepository.delete(contenidoMultimedia);
+    }
+
+    private ContenidoMutimediaDTO convertToDTO(ContenidoMultimedia contenido) {
+        ContenidoMutimediaDTO dto = new ContenidoMutimediaDTO();
+        BeanUtils.copyProperties(contenido, dto);
+        dto.setAlbumId(contenido.getAlbum().getId());
+        return dto;
+    }
     private String obtenerFormatoArchivo(String fileName) {
         int index = fileName.lastIndexOf('.');
         if (index > 0) {

@@ -7,7 +7,7 @@ import BackendSiadseUfps.siadse.entity.OurUsers;
 import BackendSiadseUfps.siadse.repository.ComentarioRepository;
 import BackendSiadseUfps.siadse.repository.ContenidoMultimediaRepository;
 import BackendSiadseUfps.siadse.repository.OurUserRepo;
-import BackendSiadseUfps.siadse.service.interfaces.ComentarioServiceInterface;
+import BackendSiadseUfps.siadse.service.interfaces.ComentarioService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ComentarioService implements ComentarioServiceInterface {
+public class ComentarioServiceImpl implements ComentarioService {
 
     @Autowired
     private ComentarioRepository comentarioRepository;

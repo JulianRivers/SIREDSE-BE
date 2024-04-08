@@ -4,10 +4,9 @@ import BackendSiadseUfps.siadse.dto.ContenidoMutimediaDTO;
 import BackendSiadseUfps.siadse.dto.NormatividadDTO;
 import BackendSiadseUfps.siadse.entity.Normatividad;
 import BackendSiadseUfps.siadse.entity.Semillero;
-import BackendSiadseUfps.siadse.repository.AlbumRepository;
 import BackendSiadseUfps.siadse.repository.NormatividadRepository;
 import BackendSiadseUfps.siadse.repository.SemilleroRepository;
-import BackendSiadseUfps.siadse.service.interfaces.AWSS3ServiceInterface;
+import BackendSiadseUfps.siadse.service.interfaces.AWSS3Service;
 import BackendSiadseUfps.siadse.service.interfaces.NormatividadService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -22,9 +21,9 @@ public class NormativiadadServiceImpl implements NormatividadService {
     private NormatividadRepository normatividadRepository;
     private SemilleroRepository semilleroRepository;
     private final ModelMapper modelMapper;
-    private AWSS3ServiceInterface awss3Service;
+    private AWSS3Service awss3Service;
 
-    public NormativiadadServiceImpl( SemilleroRepository semilleroRepository, ModelMapper modelMapper, AWSS3ServiceInterface awss3Service, NormatividadRepository normatividadRepository) {
+    public NormativiadadServiceImpl(SemilleroRepository semilleroRepository, ModelMapper modelMapper, AWSS3Service awss3Service, NormatividadRepository normatividadRepository) {
         this.semilleroRepository = semilleroRepository;
         this.modelMapper = modelMapper;
         this.awss3Service = awss3Service;
