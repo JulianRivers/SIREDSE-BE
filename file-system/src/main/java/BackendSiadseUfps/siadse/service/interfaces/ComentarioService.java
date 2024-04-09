@@ -4,7 +4,7 @@ import BackendSiadseUfps.siadse.dto.ComentarioDTO;
 
 import java.util.List;
 
-public interface ComentarioServiceInterface {
+public interface ComentarioService {
     ComentarioDTO createComment(ComentarioDTO comentarioDTO, Integer mediaId);
     ComentarioDTO updateComment(ComentarioDTO comentarioDTO);
     void deleteComment(Integer comentarioId);

@@ -1,7 +1,7 @@
 package BackendSiadseUfps.siadse.controller;
 
 import BackendSiadseUfps.siadse.dto.ComentarioDTO;
-import BackendSiadseUfps.siadse.service.interfaces.ComentarioServiceInterface;
+import BackendSiadseUfps.siadse.service.interfaces.ComentarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,16 +14,16 @@ import java.util.List;
 public class ComentarioController {
 
     @Autowired
-    private ComentarioServiceInterface comentarioService;
+    private ComentarioService comentarioService;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<ComentarioDTO> createComment(@RequestBody ComentarioDTO comentarioDTO,
                                                        @RequestParam("mediaId") Integer mediaId) {
         ComentarioDTO createdComment = comentarioService.createComment(comentarioDTO, mediaId);
         return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<ComentarioDTO> updateComment(@RequestParam("id") Integer comentarioId,
                                                        @RequestBody ComentarioDTO comentarioDTO) {
         comentarioDTO.setId(comentarioId);
@@ -31,7 +31,7 @@ public class ComentarioController {
         return new ResponseEntity<>(updatedComment, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping
     public ResponseEntity<String> deleteComment(@RequestParam("id") Integer comentarioId) {
         comentarioService.deleteComment(comentarioId);
         return new ResponseEntity<>("Comentario borrado exitosamente", HttpStatus.OK);

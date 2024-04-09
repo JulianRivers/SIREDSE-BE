@@ -2,7 +2,7 @@ package BackendSiadseUfps.siadse.controller;
 
 import java.util.List;
 
-import BackendSiadseUfps.siadse.service.interfaces.AWSS3ServiceInterface;
+import BackendSiadseUfps.siadse.service.interfaces.AWSS3Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class AwsS3Controller {
 
     @Autowired
-    private AWSS3ServiceInterface awss3Service;
+    private AWSS3Service awss3Service;
 
     @PostMapping(value = "/upload")
     public ResponseEntity<String> uploadFile(@RequestPart(value="file") MultipartFile file, String ruta) {

@@ -1,7 +1,7 @@
 package BackendSiadseUfps.siadse.service.implementations;
 import BackendSiadseUfps.siadse.dto.ContenidoMutimediaDTO;
 import BackendSiadseUfps.siadse.entity.Album;
-import BackendSiadseUfps.siadse.service.interfaces.AWSS3ServiceInterface;
+import BackendSiadseUfps.siadse.service.interfaces.AWSS3Service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
 import org.slf4j.Logger;
@@ -21,9 +21,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-public class AWSS3Service implements AWSS3ServiceInterface {
+public class AWSS3ServiceImpl implements AWSS3Service {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AWSS3Service.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AWSS3ServiceImpl.class);
 
     @Autowired
     private AmazonS3 amazonS3;
@@ -104,5 +104,21 @@ public class AWSS3Service implements AWSS3ServiceInterface {
             fos.write(file.getBytes());
         }
         return convertedFile;
+    }
+
+    @Override
+    public void deleteFolder(String folderName) {
+        // Eliminar todos los objetos dentro de la carpeta
+        ObjectListing objectListing = amazonS3.listObjects(bucketName, folderName);
+        for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
+            amazonS3.deleteObject(bucketName, objectSummary.getKey());
+        }
+        // Eliminar la carpeta
+        amazonS3.deleteObject(bucketName, folderName + "/");
+    }
+
+    @Override
+    public void deleteFile(String key) {
+        amazonS3.deleteObject(bucketName, key);
     }
 }
