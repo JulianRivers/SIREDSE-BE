@@ -22,7 +22,7 @@ public class PQRSDTO {
     private Date fechaRadicado;
     private EstadosPQRS estadoRadicado;
     private String correo;
-    private TiposPQRS tipoPqrs;
+    private TiposPQRS tiposPqrs;
     private Boolean anonimo;
     private String nombre;
     private String apellido;

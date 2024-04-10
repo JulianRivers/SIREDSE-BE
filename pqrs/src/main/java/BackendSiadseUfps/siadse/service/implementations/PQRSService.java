@@ -127,7 +127,7 @@ public class PQRSService implements IPQRSService {
                     .fechaRadicado(pqrs.getFechaRadicado())
                     .estadoRadicado(pqrs.getEstadoRadicado())
                     .correo(pqrs.getCorreo())
-                    .tipoPqrs(pqrs.getTipoPqrs())
+                    .tiposPqrs(pqrs.getTipoPqrs())
                     .anonimo(pqrs.getAnonimo())
                     .nombre(pqrs.getNombre())
                     .apellido(pqrs.getApellido())
