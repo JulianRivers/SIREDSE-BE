@@ -174,6 +174,22 @@ public class PQRSService implements IPQRSService {
         return PQRSDTOs;
     }
 
+    @Override
+    public boolean eliminarPQRS (Integer pqrsID){
+        PQRS pqrs = pqrsRepo.findById(pqrsID).orElseThrow(() -> new IllegalArgumentException("PQRS not found"));
+        EstadosPQRS estado = estPQRSRepo.findByEstado("PENDIENTE");
+        if(pqrs.getEstadoRadicado().equals(estado)){
+            throw new IllegalArgumentException("No se puede eliminar el PQRS si no esta resuelto");
+        }
+
+        try {
+            pqrsRepo.delete(pqrs);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
     public void cambiosEstadoPQRS(PQRS pqrs, EstadosPQRS estado){
         CambioEstRad cambioEstRad = new CambioEstRad();
