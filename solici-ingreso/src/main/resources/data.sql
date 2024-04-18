@@ -1,11 +1,10 @@
 
-DROP TABLE IF EXISTS lineas_investigacion;
+DROP TABLE IF EXISTS cambio_estado_solicitud CASCADE;
 DROP TABLE IF EXISTS solicitud_ingreso_semillero CASCADE;
-DROP TABLE IF EXISTS cambio_estado_solicitud;
-DROP TABLE IF EXISTS semillero;
-DROP TABLE IF EXISTS ourusers;
-DROP TABLE IF EXISTS estados_solicitud CASCADE ;
-
+DROP TABLE IF EXISTS estados_solicitud CASCADE;
+DROP TABLE IF EXISTS lineas_de_investigacion CASCADE;
+DROP TABLE IF EXISTS semillero CASCADE;
+DROP TABLE IF EXISTS ourusers CASCADE;
 
 
 CREATE TABLE IF NOT EXISTS ourusers (

@@ -127,7 +127,7 @@ public class PQRSService implements IPQRSService {
                     .fechaRadicado(pqrs.getFechaRadicado())
                     .estadoRadicado(pqrs.getEstadoRadicado())
                     .correo(pqrs.getCorreo())
-                    .tipoPqrs(pqrs.getTipoPqrs())
+                    .tiposPqrs(pqrs.getTipoPqrs())
                     .anonimo(pqrs.getAnonimo())
                     .nombre(pqrs.getNombre())
                     .apellido(pqrs.getApellido())
@@ -172,6 +172,22 @@ public class PQRSService implements IPQRSService {
         }
 
         return PQRSDTOs;
+    }
+
+    @Override
+    public boolean eliminarPQRS (Integer pqrsID){
+        PQRS pqrs = pqrsRepo.findById(pqrsID).orElseThrow(() -> new IllegalArgumentException("PQRS not found"));
+        EstadosPQRS estado = estPQRSRepo.findByEstado("PENDIENTE");
+        if(pqrs.getEstadoRadicado().equals(estado)){
+            throw new IllegalArgumentException("No se puede eliminar el PQRS si no esta resuelto");
+        }
+
+        try {
+            pqrsRepo.delete(pqrs);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 

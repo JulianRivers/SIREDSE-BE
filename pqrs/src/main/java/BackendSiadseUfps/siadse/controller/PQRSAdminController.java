@@ -30,6 +30,11 @@ public class PQRSAdminController {
         return pqrsService.listarPQRSporEstado(estado);
     }
 
+    @DeleteMapping("/delete")
+    public Boolean deletePQRS(@RequestParam Integer pqrsID){
+        return  pqrsService.eliminarPQRS(pqrsID);
+    }
+
     @PostMapping("/revision")
     public Response reviewPQRS(@RequestParam Integer pqrsId) {
         Response response = new Response();

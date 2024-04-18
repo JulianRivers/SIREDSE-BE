@@ -12,5 +12,7 @@ public interface IPQRSService {
     public List<PQRSDTO> listarPQRSporTipo(Integer tipoID);
     public List<PQRSDTO> listarPQRSporEstado(Integer estadoID);
 
+    public boolean eliminarPQRS (Integer pqrsID);
+
 
 }

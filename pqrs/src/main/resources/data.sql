@@ -1,10 +1,11 @@
-DROP TABLE IF EXISTS ourusers;
-DROP TABLE IF EXISTS lineas_investigacion;
-DROP TABLE IF EXISTS cambio_estado_radicado;
-DROP TABLE IF EXISTS pqrs;
-DROP TABLE IF EXISTS estados_pqrs;
-DROP TABLE IF EXISTS tipos_pqrs;
-DROP TABLE IF EXISTS semillero;
+DROP TABLE IF EXISTS cambio_estado_radicado CASCADE;
+DROP TABLE IF EXISTS pqrs CASCADE;
+DROP TABLE IF EXISTS ourusers CASCADE;
+DROP TABLE IF EXISTS semillero CASCADE;
+DROP TABLE IF EXISTS lineas_de_investigacion CASCADE;
+DROP TABLE IF EXISTS estados_pqrs CASCADE;
+DROP TABLE IF EXISTS tipos_pqrs CASCADE;
+
 
 CREATE TABLE IF NOT EXISTS ourusers (
     id SERIAL PRIMARY KEY,
@@ -64,8 +65,8 @@ CREATE TABLE IF NOT EXISTS pqrs (
 ALTER TABLE pqrs
     ADD COLUMN id_estados INT NOT NULL,
     ADD CONSTRAINT fk_estados_id FOREIGN KEY (id_estados) REFERENCES estados_pqrs (id),
-    ADD COLUMN id_tipo_pqrs INT NOT NULL,
-    ADD CONSTRAINT fk_tipopqrs_id FOREIGN KEY (id_tipo_pqrs) REFERENCES tipos_pqrs (id);
+    ADD COLUMN id_tipos_pqrs INT NOT NULL,
+    ADD CONSTRAINT fk_tipospqrs_id FOREIGN KEY (id_tipos_pqrs) REFERENCES tipos_pqrs (id);
 
 ALTER TABLE cambio_estado_radicado
     ADD COLUMN id_estados INT NOT NULL,
