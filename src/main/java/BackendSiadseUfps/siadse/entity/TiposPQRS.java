@@ -1,6 +1,6 @@
-package com.ufps.pqrsbe.entity;
+package BackendSiadseUfps.siadse.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 
 @Data
@@ -14,4 +14,19 @@ public class TiposPQRS {
 
     private String tipo;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 }

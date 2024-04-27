@@ -2,11 +2,8 @@ package BackendSiadseUfps.siadse.service.implementations;
 
 import BackendSiadseUfps.siadse.dto.ComentarioDTO;
 import BackendSiadseUfps.siadse.entity.Comentario;
-import BackendSiadseUfps.siadse.entity.ContenidoMultimedia;
-import BackendSiadseUfps.siadse.entity.OurUsers;
 import BackendSiadseUfps.siadse.repository.ComentarioRepository;
 import BackendSiadseUfps.siadse.repository.ContenidoMultimediaRepository;
-import BackendSiadseUfps.siadse.repository.OurUserRepo;
 import BackendSiadseUfps.siadse.service.interfaces.ComentarioService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,31 +22,10 @@ public class ComentarioServiceImpl implements ComentarioService {
     @Autowired
     private ContenidoMultimediaRepository contenidoMultimediaRepository;
 
-    @Autowired
-    private OurUserRepo userRepository;
 
     @Override
     public ComentarioDTO createComment(ComentarioDTO comentarioDTO, Integer mediaId) {
-        ContenidoMultimedia media = contenidoMultimediaRepository.findById(mediaId)
-                .orElseThrow(() -> new IllegalArgumentException("No se encontró el archivo multimedia con el ID especificado"));
-
-        OurUsers user = userRepository.findById(comentarioDTO.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("No se encontró el usuario con el ID especificado"));
-
-        Comentario comentario = new Comentario();
-        comentario.setFechaCreacion(new Date());
-        comentario.setComentario(comentarioDTO.getComentario());
-        comentario.setContenidoMultimedia(media);
-        comentario.setUser(user);
-
-        Comentario savedComentario = comentarioRepository.save(comentario);
-
-        ComentarioDTO responseDTO = new ComentarioDTO();
-        responseDTO.setUserId(savedComentario.getUser().getId());
-        responseDTO.setContenidoMultimediaId(savedComentario.getContenidoMultimedia().getId());
-        BeanUtils.copyProperties(savedComentario, responseDTO);
-
-        return responseDTO;
+        return null;
     }
 
     @Override
@@ -76,40 +52,23 @@ public class ComentarioServiceImpl implements ComentarioService {
         comentarioRepository.delete(comentario);
     }
 
-
     @Override
     public List<ComentarioDTO> getAllComments() {
-        List<Comentario> comentarios = comentarioRepository.findAll();
-        return comentarios.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        return null;
     }
 
     @Override
     public List<ComentarioDTO> getCommentsByMedia(Integer mediaId) {
-        ContenidoMultimedia media = contenidoMultimediaRepository.findById(mediaId)
-                .orElseThrow(() -> new IllegalArgumentException("No se encontró el archivo multimedia con el ID especificado"));
-        List<Comentario> comentarios = comentarioRepository.findByContenidoMultimedia(media);
-        return comentarios.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        return null;
     }
 
     @Override
     public List<ComentarioDTO> getCommentsByUser(Integer userId) {
-        OurUsers user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("No se encontró el usuario con el ID especificado"));
-        List<Comentario> comentarios = comentarioRepository.findByUser(user);
-        return comentarios.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        return null;
     }
 
-    private ComentarioDTO convertToDTO(Comentario comentario) {
-        ComentarioDTO comentarioDTO = new ComentarioDTO();
-        comentarioDTO.setContenidoMultimediaId(comentario.getContenidoMultimedia().getId());
-        comentarioDTO.setUserId(comentario.getUser().getId());
-        BeanUtils.copyProperties(comentario, comentarioDTO);
-        return comentarioDTO;
-    }
+
+
+
+
 }

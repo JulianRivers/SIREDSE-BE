@@ -1,8 +1,9 @@
-package com.ufps.pqrsbe.repository;
+package BackendSiadseUfps.siadse.repository;
 
-import com.ufps.pqrsbe.entity.EstadosPQRS;
-import com.ufps.pqrsbe.entity.PQRS;
-import com.ufps.pqrsbe.entity.TiposPQRS;
+
+import BackendSiadseUfps.siadse.entity.EstadosPQRS;
+import BackendSiadseUfps.siadse.entity.PQRS;
+import BackendSiadseUfps.siadse.entity.TiposPQRS;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

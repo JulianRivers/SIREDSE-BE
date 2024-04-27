@@ -1,6 +1,7 @@
-package com.ufps.pqrsbe.service.interfaces;
+package BackendSiadseUfps.siadse.service.interfaces;
 
-import com.ufps.pqrsbe.dto.PQRSDTO;
+
+import BackendSiadseUfps.siadse.dto.PQRSDTO;
 
 import java.util.List;
 

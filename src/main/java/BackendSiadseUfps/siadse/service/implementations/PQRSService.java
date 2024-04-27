@@ -1,11 +1,15 @@
-package com.ufps.pqrsbe.service.implementations;
+package BackendSiadseUfps.siadse.service.implementations;
 
-import com.ufps.pqrsbe.dto.PQRSDTO;
-import com.ufps.pqrsbe.entity.*;
-import com.ufps.pqrsbe.repository.EstPQRSRepo;
-import com.ufps.pqrsbe.repository.PQRSRepo;
-import com.ufps.pqrsbe.repository.TipoPQRSRepo;
-import com.ufps.pqrsbe.service.interfaces.IPQRSService;
+import BackendSiadseUfps.siadse.dto.PQRSDTO;
+import BackendSiadseUfps.siadse.entity.CambioEstRad;
+import BackendSiadseUfps.siadse.entity.EstadosPQRS;
+import BackendSiadseUfps.siadse.entity.PQRS;
+
+import BackendSiadseUfps.siadse.entity.TiposPQRS;
+import BackendSiadseUfps.siadse.repository.EstPQRSRepo;
+import BackendSiadseUfps.siadse.repository.PQRSRepo;
+import BackendSiadseUfps.siadse.repository.TipoPQRSRepo;
+import BackendSiadseUfps.siadse.service.interfaces.IPQRSService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

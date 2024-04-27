@@ -1,7 +1,6 @@
 package BackendSiadseUfps.siadse.controller;
 
-import BackendSiadseUfps.siadse.dto.AlbumDTO;
-import BackendSiadseUfps.siadse.dto.ReqRes;
+
 import BackendSiadseUfps.siadse.dto.SemilleroDTO;
 import BackendSiadseUfps.siadse.service.interfaces.NormatividadService;
 import BackendSiadseUfps.siadse.service.interfaces.SemilleroService;

@@ -1,6 +1,6 @@
-package com.ufps.pqrsbe.entity;
+package BackendSiadseUfps.siadse.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -23,4 +23,36 @@ public class CambioEstRad {
     private EstadosPQRS estado;
 
     private Date fecha_cambio;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public PQRS getPqrs() {
+        return pqrs;
+    }
+
+    public void setPqrs(PQRS pqrs) {
+        this.pqrs = pqrs;
+    }
+
+    public EstadosPQRS getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadosPQRS estado) {
+        this.estado = estado;
+    }
+
+    public Date getFecha_cambio() {
+        return fecha_cambio;
+    }
+
+    public void setFecha_cambio(Date fecha_cambio) {
+        this.fecha_cambio = fecha_cambio;
+    }
 }

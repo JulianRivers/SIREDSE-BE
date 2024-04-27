@@ -1,8 +1,16 @@
-package com.ufps.pqrsbe.models;
+package BackendSiadseUfps.siadse.models;
 
 import lombok.Data;
 
 @Data
 public class Response {
     private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

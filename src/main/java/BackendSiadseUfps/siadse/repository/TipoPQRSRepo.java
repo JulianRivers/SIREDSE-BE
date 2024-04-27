@@ -1,6 +1,6 @@
-package com.ufps.pqrsbe.repository;
+package BackendSiadseUfps.siadse.repository;
 
-import com.ufps.pqrsbe.entity.TiposPQRS;
+import BackendSiadseUfps.siadse.entity.TiposPQRS;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TipoPQRSRepo extends JpaRepository<TiposPQRS, Integer> {

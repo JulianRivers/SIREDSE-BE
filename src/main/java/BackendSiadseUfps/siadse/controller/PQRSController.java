@@ -1,8 +1,9 @@
-package com.ufps.pqrsbe.controller;
+package BackendSiadseUfps.siadse.controller;
 
-import com.ufps.pqrsbe.dto.PQRSDTO;
-import com.ufps.pqrsbe.models.Response;
-import com.ufps.pqrsbe.service.implementations.PQRSService;
+
+import BackendSiadseUfps.siadse.dto.PQRSDTO;
+import BackendSiadseUfps.siadse.models.Response;
+import BackendSiadseUfps.siadse.service.implementations.PQRSService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
