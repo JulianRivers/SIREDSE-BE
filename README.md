@@ -2,6 +2,7 @@
 
 Este es el backend hecho en base a microservicios con springboot, JWT y postgreSQL del aplicativo web para gestionar los semilleros de la UFPS semillero de invetigacion.
 
+<<<<<<< HEAD
 ## registro
 
 `POST localhost:8080/auth/signup`
@@ -39,6 +40,12 @@ Este es el backend hecho en base a microservicios con springboot, JWT y postgreS
     "password": "ufps2023"
 }
 ```
+=======
+# Postman Importe
+[Descarga el archivo aquí](https://github.com/JulianRivers/SIREDSE-BE/blob/dev/SIADSE.postman_collection.json)
+
+https://github.com/JulianRivers/SIREDSE-BE/blob/dev/SIADSE.postman_collection.json
+>>>>>>> fad63a79845efc855a1ac93fd439c0e82c51471a
 
 ## Normatividad
 

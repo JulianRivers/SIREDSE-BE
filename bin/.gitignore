@@ -1,3 +1,5 @@
+application.properties
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -18,6 +20,7 @@ target/
 *.iws
 *.iml
 *.ipr
+*.properties
 
 ### NetBeans ###
 /nbproject/private/
