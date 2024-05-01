@@ -3,7 +3,6 @@ package BackendSiadseUfps.siadse.service.implementations;
 import BackendSiadseUfps.siadse.dto.ContenidoMutimediaDTO;
 import BackendSiadseUfps.siadse.dto.NormatividadDTO;
 import BackendSiadseUfps.siadse.entity.Normatividad;
-import BackendSiadseUfps.siadse.entity.Semillero;
 import BackendSiadseUfps.siadse.repository.NormatividadRepository;
 import BackendSiadseUfps.siadse.repository.SemilleroRepository;
 import BackendSiadseUfps.siadse.service.interfaces.AWSS3Service;

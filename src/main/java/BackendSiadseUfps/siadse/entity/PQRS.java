@@ -3,8 +3,7 @@ package BackendSiadseUfps.siadse.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import BackendSiadseUfps.siadse.entity.EstadosPQRS;
-import BackendSiadseUfps.siadse.entity.TiposPQRS;
+
 import lombok.Data;
 
 

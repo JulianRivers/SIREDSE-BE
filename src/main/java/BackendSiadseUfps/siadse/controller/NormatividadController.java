@@ -1,7 +1,7 @@
 package BackendSiadseUfps.siadse.controller;
 
 import BackendSiadseUfps.siadse.dto.AlbumDTO;
-import BackendSiadseUfps.siadse.dto.ContenidoMutimediaDTO;
+
 import BackendSiadseUfps.siadse.dto.NormatividadDTO;
 import BackendSiadseUfps.siadse.service.interfaces.NormatividadService;
 import org.springframework.beans.factory.annotation.Autowired;
