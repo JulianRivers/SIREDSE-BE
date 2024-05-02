@@ -1,0 +1,279 @@
+{
+	"info": {
+		"_postman_id": "630e248d-4892-4482-90b0-151b4c781ad7",
+		"name": "SIADSE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23540140"
+	},
+	"item": [
+		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "CREAR SEMILLERO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Semillero de Tecnología\",\r\n  \"descripcion\": \"Semillero dedicado a proyectos innovadores en el área de la tecnología.\",\r\n  \"fechaCreacion\": \"2024-04-30T12:00:00Z\",\r\n  \"fechaActualizacion\": \"2024-04-30T12:00:00Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/semilleros"
+					},
+					"response": []
+				},
+				{
+					"name": "crear Proyectos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"projectName\": \"Nuevo Proyecto\",\r\n  \"archivo\": \"ruta/al/archivo\",\r\n  \"imagen\": \"ruta/a/imagen\",\r\n  \"categoria\": {\r\n    \"id\": 1,\r\n    \"nombre\": \"IA\"\r\n  },\r\n  \"projectLeader\": {\r\n    \"id\": 1,\r\n    \"name\": \"jonny\"\r\n  },\r\n  \"semillero\": {\r\n    \"id\": 1,\r\n    \"nombre\": \"Semillero de Inteligencia Artificial/ CHAT GPT\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener un proyecto por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/projects/1"
+					},
+					"response": []
+				},
+				{
+					"name": "No funciona ACTUALIZAR UN PROYECTO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"id\": 1,\r\n  \"projectName\": \"bUEN NOMBRE XD\",\r\n  \"archivo\": \"ruta/al/archivo\",\r\n  \"imagen\": \"ruta/a/imagen\",\r\n  \"categoria\": {\r\n    \"id\": 1,\r\n    \"nombre\": \"IA\"\r\n  },\r\n  \"projectLeader\": {\r\n    \"id\": 1,\r\n    \"name\": \"jonny\"\r\n  },\r\n  \"semillero\": {\r\n    \"id\": 1,\r\n    \"nombre\": \"Semillero de Inteligencia Artificial/ CHAT GPT\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/projects/1"
+					},
+					"response": []
+				},
+				{
+					"name": "OBTENER TODOS LOS PROYECTOS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/projects"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "registro de usuarios",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Andres Portilla\",\r\n    \"name\": \"ANDRES\",\r\n    \"email\": \"Andres@example.com\",\r\n    \"password\": \"securePassword123\",\r\n    \"codigoUniversidad\": \"U123456\",\r\n    \"semestreActual\": 5,\r\n    \"edad\": 22,\r\n    \"direccionResidencia\": \"1234 Calle Ficticia\",\r\n    \"celular\": \"3210001122\",\r\n    \"role\": {\r\n        \"id\": 2,\r\n        \"name\": \"DIRECTOR\"\r\n    },\"loggedIn\": false\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/users/register"
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"Andres@example.com\",\r\n    \"password\": \"securePassword123\"\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "cerrar seccion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"2\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/users/logout?email=Perreo@example.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"logout"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "Perreo@example.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DIRECTOR",
+			"item": [
+				{
+					"name": "CREAR SEMILLERO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Semillero de Tecnología y TIc\",\r\n  \"descripcion\": \"Semillero dedicado a proyectos innovadores en el área de la tecnología.\",\r\n  \"fechaCreacion\": \"2024-04-30T12:00:00Z\",\r\n  \"fechaActualizacion\": \"2024-04-30T12:00:00Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/semilleros"
+					},
+					"response": []
+				},
+				{
+					"name": "Crear USER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Perreo\",\r\n    \"name\": \"Oerreo Jaimes\",\r\n    \"email\": \"Perreo@example.com\",\r\n    \"password\": \"securePassword123\",\r\n    \"codigoUniversidad\": \"U123456\",\r\n    \"semestreActual\": 5,\r\n    \"edad\": 22,\r\n    \"direccionResidencia\": \"1234 Calle Ficticia\",\r\n    \"celular\": \"3210001122\",\r\n    \"role\": {\r\n        \"id\": 2,\r\n        \"name\": \"USER\"\r\n    },\"loggedIn\": false\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/users/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Asignar un Director a un Semillero",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "localhost:8080/api/semilleros/1/asignarDirector/2"
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar SEMILLERO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Semillero de Inteligencia Artificial/ CHAT GPT\",\r\n  \"descripcion\": \"Enfocado en desarrollar capacidades en IA y machine learning.\",\r\n  \"fechaCreacion\": \"2024-04-30T12:00:00Z\",\r\n  \"fechaActualizacion\": \"2024-05-01T15:00:00Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/semilleros/1"
+					},
+					"response": []
+				},
+				{
+					"name": "GET SEMILLERO",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/semilleros/1"
+					},
+					"response": []
+				},
+				{
+					"name": "ELiminar Semillero No la probe pero  seguro sirve xddd",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/semilleros/1"
+					},
+					"response": []
+				},
+				{
+					"name": "TODOS LOS SEMILLEROS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/semilleros"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
