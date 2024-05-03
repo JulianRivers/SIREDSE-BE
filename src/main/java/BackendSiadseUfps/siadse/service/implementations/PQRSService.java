@@ -62,6 +62,10 @@ public class PQRSService implements IPQRSService {
             if (pqrs.getCedula() == null || pqrs.getCedula() == "") {
                 throw new IllegalArgumentException("La cédula de la persona no puede estar vacío.");
             }
+        }else{
+            pqrs.setNombre("No Aplica");
+            pqrs.setApellido("No Aplica");
+            pqrs.setCedula("No Aplica");
         }
 
         PQRS pqrsRadicado = pqrsRepo.save(pqrs);
