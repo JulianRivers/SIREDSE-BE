@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "630e248d-4892-4482-90b0-151b4c781ad7",
+		"_postman_id": "149de018-b646-4297-86a9-f6038d084c03",
 		"name": "SIADSE",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "23540140"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19404986"
 	},
 	"item": [
 		{
@@ -23,7 +23,17 @@
 								}
 							}
 						},
-						"url": "localhost:8080/api/semilleros"
+						"url": {
+							"raw": "localhost:8080/api/semilleros",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"semilleros"
+							]
+						}
 					},
 					"response": []
 				},
@@ -41,7 +51,17 @@
 								}
 							}
 						},
-						"url": "localhost:8080/api/projects"
+						"url": {
+							"raw": "localhost:8080/api/projects",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"projects"
+							]
+						}
 					},
 					"response": []
 				},
@@ -50,7 +70,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:8080/api/projects/1"
+						"url": {
+							"raw": "localhost:8080/api/projects/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"projects",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -68,7 +99,18 @@
 								}
 							}
 						},
-						"url": "localhost:8080/api/projects/1"
+						"url": {
+							"raw": "localhost:8080/api/projects/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"projects",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -77,7 +119,17 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:8080/api/projects"
+						"url": {
+							"raw": "localhost:8080/api/projects",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"projects"
+							]
+						}
 					},
 					"response": []
 				}
@@ -93,14 +145,25 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Andres Portilla\",\r\n    \"name\": \"ANDRES\",\r\n    \"email\": \"Andres@example.com\",\r\n    \"password\": \"securePassword123\",\r\n    \"codigoUniversidad\": \"U123456\",\r\n    \"semestreActual\": 5,\r\n    \"edad\": 22,\r\n    \"direccionResidencia\": \"1234 Calle Ficticia\",\r\n    \"celular\": \"3210001122\",\r\n    \"role\": {\r\n        \"id\": 2,\r\n        \"name\": \"DIRECTOR\"\r\n    },\"loggedIn\": false\r\n}\r\n\r\n",
+							"raw": "{\r\n    \"username\": \"Andres Portill2a\",// UNIQUE\r\n    \"name\": \"ANDRES2\",\r\n    \"email\": \"Andre1s@example.com\",// UNIQUE\r\n    \"password\": \"securePassword123\",\r\n    \"codigoUniversidad\": \"U126457\",\r\n    \"semestreActual\": 5,\r\n    \"edad\": 22,\r\n    \"direccionResidencia\": \"1234 Calle Ficticia\",\r\n    \"celular\": \"3210001342\",\r\n    \"role\": {\r\n        \"id\": 2,\r\n        \"name\": \"DIRECTOR\"\r\n    },\"loggedIn\": false\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "localhost:8080/api/users/register"
+						"url": {
+							"raw": "localhost:8080/api/users/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
 					},
 					"response": []
 				},
@@ -111,14 +174,25 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"Andres@example.com\",\r\n    \"password\": \"securePassword123\"\r\n} ",
+							"raw": "{\r\n    \"email\": \"Andres@example.com\",\r\n    \"password\": \"securePassword1213\"\r\n} ",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "localhost:8080/api/users/login"
+						"url": {
+							"raw": "localhost:8080/api/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
 					},
 					"response": []
 				},
@@ -176,25 +250,17 @@
 								}
 							}
 						},
-						"url": "localhost:8080/api/semilleros"
-					},
-					"response": []
-				},
-				{
-					"name": "Crear USER",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Perreo\",\r\n    \"name\": \"Oerreo Jaimes\",\r\n    \"email\": \"Perreo@example.com\",\r\n    \"password\": \"securePassword123\",\r\n    \"codigoUniversidad\": \"U123456\",\r\n    \"semestreActual\": 5,\r\n    \"edad\": 22,\r\n    \"direccionResidencia\": \"1234 Calle Ficticia\",\r\n    \"celular\": \"3210001122\",\r\n    \"role\": {\r\n        \"id\": 2,\r\n        \"name\": \"USER\"\r\n    },\"loggedIn\": false\r\n}\r\n\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "localhost:8080/api/users/register"
+						"url": {
+							"raw": "localhost:8080/api/semilleros",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"semilleros"
+							]
+						}
 					},
 					"response": []
 				},
@@ -203,7 +269,28 @@
 					"request": {
 						"method": "POST",
 						"header": [],
-						"url": "localhost:8080/api/semilleros/1/asignarDirector/2"
+						"url": {
+							"raw": "localhost:8080/api/semilleros/director?semillero=1&director=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"semilleros",
+								"director"
+							],
+							"query": [
+								{
+									"key": "semillero",
+									"value": "1"
+								},
+								{
+									"key": "director",
+									"value": "1"
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -221,7 +308,18 @@
 								}
 							}
 						},
-						"url": "localhost:8080/api/semilleros/1"
+						"url": {
+							"raw": "localhost:8080/api/semilleros/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"semilleros",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -242,7 +340,18 @@
 								}
 							}
 						},
-						"url": "localhost:8080/api/semilleros/1"
+						"url": {
+							"raw": "localhost:8080/api/semilleros/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"semilleros",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -260,7 +369,18 @@
 								}
 							}
 						},
-						"url": "localhost:8080/api/semilleros/1"
+						"url": {
+							"raw": "localhost:8080/api/semilleros/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"semilleros",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -269,7 +389,182 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:8080/api/semilleros"
+						"url": {
+							"raw": "localhost:8080/api/semilleros",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"semilleros"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ARCHIVOS",
+			"item": [
+				{
+					"name": "subir normatividad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PQRS",
+			"item": [
+				{
+					"name": "LISTAR PQRS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:6060/pqrs",
+							"host": [
+								"localhost"
+							],
+							"port": "6060",
+							"path": [
+								"pqrs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINAR PQRS",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB1ZnBzLmNvIiwiaWF0IjoxNzEzMzk2OTE2LCJleHAiOjE3MTM0ODMzMTZ9.wdedEq9cTahO7vwCcaETFmiRWb4ZtEDGmfoUOFTDI4k",
+								"type": "text",
+								"uuid": "4736f608-1bf8-44e2-a394-8b89f10afd0f",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:6060/pqrs/delete?pqrsID=1",
+							"host": [
+								"localhost"
+							],
+							"port": "6060",
+							"path": [
+								"pqrs",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "pqrsID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CAMBIO DE ESTADO A REVISION, LUEGO A RESUELTO ANTES DE DELETE",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB1ZnBzLmNvIiwiaWF0IjoxNzEzMzk2OTE2LCJleHAiOjE3MTM0ODMzMTZ9.wdedEq9cTahO7vwCcaETFmiRWb4ZtEDGmfoUOFTDI4k",
+								"type": "text",
+								"uuid": "06f25501-5c3b-447b-81bd-6fa3b2a6c2e9",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:6060/pqrs/resuelto?pqrsId=1",
+							"host": [
+								"localhost"
+							],
+							"port": "6060",
+							"path": [
+								"pqrs",
+								"resuelto"
+							],
+							"query": [
+								{
+									"key": "pqrsId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREAR PQRS CON TIPO PQR",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 0afb3af6-5c93-4b31-8a7f-41d2685c8d60",
+								"description": "admin",
+								"type": "text",
+								"uuid": "a397737b-d71a-4bd2-9691-e2b90a3b3e2f",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25ueWphaW1lc0B1ZnBzLmNvIiwiaWF0IjoxNzEyMDc1MTI1LCJleHAiOjE3MTIxNjE1MjV9.RkMD3SK-pNBKMpcXkGG0J7ApPaZ8AwagbeFZEUZTsQM",
+								"description": "user",
+								"type": "text",
+								"uuid": "a397737b-d71a-4bd2-9691-e2b90a3b3e2f",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"hola\",\r\n    \"descripcion\": \"hola\",\r\n    \"correo\": \"hola\",\r\n    \"anonimo\": true,\r\n    \"nombre\": \"\",\r\n    \"apellido\": \"\",\r\n    \"cedula\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6060/pqrs/create?tipoPQRSID=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6060",
+							"path": [
+								"pqrs",
+								"create"
+							],
+							"query": [
+								{
+									"key": "semilleroID",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "tipoPQRSID",
+									"value": "2"
+								}
+							]
+						}
 					},
 					"response": []
 				}
