@@ -4,6 +4,8 @@ package BackendSiadseUfps.siadse.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+
 import java.util.Date;
 
 @Getter
@@ -17,6 +19,7 @@ public class Normatividad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Size(max = 50, message = "El titulo Normativida tener como máximo 50 caracteres")
     private String titulo;
 
     private Date fechaSubida;

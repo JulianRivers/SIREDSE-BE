@@ -2,7 +2,7 @@ package BackendSiadseUfps.siadse.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -18,9 +18,11 @@ public class PQRS {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Size(max = 30, message = "La descripción debe tener como máximo 300 caracteres")
     @NotNull(message = "Titulo del PQRS no puede ser nulo")
     private String titulo;
 
+    @Size(max = 100, message = "La descripción debe tener como máximo 300 caracteres")
     @NotNull(message = "Descripcion del PQRS no puede ser nulo")
     private String descripcion;
 
@@ -30,6 +32,7 @@ public class PQRS {
     @JoinColumn(name = "id_estados", nullable = false)
     private EstadosPQRS estadoRadicado;
 
+    @Size(max = 30, message = "La descripción debe tener como máximo 300 caracteres")
     @NotNull(message = "Correo del radicado no puede ser nulo")
     private String correo;
 
@@ -40,14 +43,19 @@ public class PQRS {
     @NotNull(message = "Anonimo no puede quedar sin eleccion")
     private Boolean anonimo;
 
+    @Size(max = 30, message = "La nombre PQRS debe tener como máximo 300 caracteres")
     private String nombre;
-
+    
+    @Size(max = 30, message = "El apellido debe tener como máximo 300 caracteres")
     private String apellido;
 
+    @Size(max = 30, message = "La CEDULA PQRS debe tener como máximo 300 caracteres")
     private String cedula;
 
+    @Size(max = 50, message = "El semillero PQRS debe tener como máximo 300 caracteres")
     private String semillero;
 
+    @Size(max = 100, message = "El codigo radica PQRS debe tener como máximo 300 caracteres")
     private String codigoRadicado;
 
     public Integer getId() {

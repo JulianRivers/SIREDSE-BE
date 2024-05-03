@@ -1,16 +1,16 @@
 package BackendSiadseUfps.siadse.service.implementations;
 
-import BackendSiadseUfps.siadse.dto.ComentarioDTO;
-import BackendSiadseUfps.siadse.entity.Comentario;
-import BackendSiadseUfps.siadse.repository.ComentarioRepository;
-import BackendSiadseUfps.siadse.repository.ContenidoMultimediaRepository;
-import BackendSiadseUfps.siadse.service.interfaces.ComentarioService;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import BackendSiadseUfps.siadse.dto.ComentarioDTO;
+import BackendSiadseUfps.siadse.entity.Comentario;
+import BackendSiadseUfps.siadse.repository.ComentarioRepository;
+import BackendSiadseUfps.siadse.service.interfaces.ComentarioService;
 
 
 @Service
@@ -19,8 +19,7 @@ public class ComentarioServiceImpl implements ComentarioService {
     @Autowired
     private ComentarioRepository comentarioRepository;
 
-    @Autowired
-    private ContenidoMultimediaRepository contenidoMultimediaRepository;
+    
 
 
     @Override

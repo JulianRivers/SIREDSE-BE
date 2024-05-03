@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import java.util.Date;
 
 @Getter
@@ -27,6 +29,7 @@ public class Comentario {
     /**
      * comentario realizado por el usuario al contenido multimedia
      */
+    @Size(max = 100, message = "El comentario  debe tener como máximo 100 caracteres")
     @NotNull(message = "comment cannot be null")
     private String comentario;
 
