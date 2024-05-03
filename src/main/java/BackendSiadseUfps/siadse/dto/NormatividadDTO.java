@@ -1,18 +1,26 @@
 package BackendSiadseUfps.siadse.dto;
 
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.Date;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class NormatividadDTO {
 
         private Integer id;
         private String titulo;
         private Date fechaSubida;
         private String url;
-        private String keyFile;
+
         private String formato;
         private Integer semillero;
-
+        private  String ruta;
 
     public Integer getId() {
         return id;
@@ -46,13 +54,7 @@ public class NormatividadDTO {
         this.url = url;
     }
 
-    public String getKeyFile() {
-        return keyFile;
-    }
 
-    public void setKeyFile(String keyFile) {
-        this.keyFile = keyFile;
-    }
 
     public String getFormato() {
         return formato;

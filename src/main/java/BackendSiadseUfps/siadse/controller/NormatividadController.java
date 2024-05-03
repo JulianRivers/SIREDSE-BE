@@ -25,6 +25,8 @@ public class NormatividadController {
         return new ResponseEntity<>(normatividad, HttpStatus.CREATED);
     }
 
+
+
     @GetMapping
     public ResponseEntity<AlbumDTO> listRegulations(@RequestBody AlbumDTO albumDTO) {
         return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
