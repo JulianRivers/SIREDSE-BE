@@ -20,6 +20,7 @@ public class AlbumDTO {
 
     private Date fechaActualizacion;
 
-    private String ubicacionS3;
+    private String ubicacionAlbum;
 
+    private String ruta;
 }

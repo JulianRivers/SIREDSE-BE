@@ -24,8 +24,7 @@ public class Normatividad {
     @Column(nullable = true)
     private String url;
 
-    @Column(nullable = false)
-    private String keyFile;
+    private  String ruta;
 
     private String formato;
     @ManyToOne
@@ -62,14 +61,6 @@ public class Normatividad {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getKeyFile() {
-        return keyFile;
-    }
-
-    public void setKeyFile(String keyFile) {
-        this.keyFile = keyFile;
     }
 
     public String getFormato() {
