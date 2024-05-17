@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "149de018-b646-4297-86a9-f6038d084c03",
+		"_postman_id": "1cf99c2e-8a9c-46df-be79-d85791d07239",
 		"name": "SIADSE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19404986"
+		"_exporter_id": "27039415"
 	},
 	"item": [
 		{
@@ -409,12 +409,264 @@
 			"name": "ARCHIVOS",
 			"item": [
 				{
+					"name": "delete album",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "file",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/public/album?albumId=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"public",
+								"album"
+							],
+							"query": [
+								{
+									"key": "albumId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "subir normatividad",
 					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "semilleroId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Usuario/Downloads/ingenieria de sistemas.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/public/regulation",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"public",
+								"regulation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get albums",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "localhost:8080/public/album",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"public",
+								"album"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get files by album",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "file",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/public/media/album?albumId=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"public",
+								"media",
+								"album"
+							],
+							"query": [
+								{
+									"key": "albumId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload file to album",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "file",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Usuario/Downloads/ingenieria de sistemas.jpg"
+								},
+								{
+									"key": "albumId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "titulo",
+									"value": "Logo Ing de Sistemas",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/public/media/upload",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"public",
+								"media",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create album",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Prueba\",\r\n  \"descripcion\": \"El dia 18 de Marzo, se llevo a cabo en el auditorio de la bibliteca Eduardo Cote Lamus la presentación de los semilleros de investigación de ing de sistemas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/public/album",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"public",
+								"album"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete file",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "file",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Usuario/Downloads/logo_vertical_ingsistemas_ht180.png"
+								},
+								{
+									"key": "albumId",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "titulo",
+									"value": "Logo Ing de Sistemas",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/public/media?contentId=4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"public",
+								"media"
+							],
+							"query": [
+								{
+									"key": "contentId",
+									"value": "4"
+								}
+							]
 						}
 					},
 					"response": []

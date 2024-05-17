@@ -11,25 +11,26 @@ import javax.validation.constraints.Size;
 
 import java.util.Date;
 
+@Entity
+@Table(name = "comentario")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "comentario")
 public class Comentario {
-    /**
-     * id del comentario
-     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+<<<<<<< HEAD
 
     /**
      * comentario realizado por el usuario al contenido multimedia
      */
     @Size(max = 100, message = "El comentario  debe tener como máximo 100 caracteres")
+=======
+>>>>>>> a37ec885e7975e2cc4292fb76b191a78432272b3
     @NotNull(message = "comment cannot be null")
     private String comentario;
 
@@ -39,35 +40,12 @@ public class Comentario {
 
     private Date fechaCreacion;
 
-    public Integer getId() {
-        return id;
-    }
+    /*
+     *  @ManyToOne
+     *   @JoinColumn(name = "id_user", nullable = false)
+     *   private Users user;
+     */
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    public String getComentario() {
-        return comentario;
-    }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
-
-    public ContenidoMultimedia getContenidoMultimedia() {
-        return contenidoMultimedia;
-    }
-
-    public void setContenidoMultimedia(ContenidoMultimedia contenidoMultimedia) {
-        this.contenidoMultimedia = contenidoMultimedia;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
 }
