@@ -29,6 +29,9 @@ public class PQRSService implements IPQRSService {
     @Autowired
     TipoPQRSRepo tipoPQRSRepo;
 
+    @Autowired
+    public EmailService emailService;
+
     /**
      * Método para crear los radicados PQRS, a los PQRS nuevos se les asignará el estado de PENDIENTE
      * No es necesario asignarle rol por lo que es público en la web.
@@ -68,6 +71,7 @@ public class PQRSService implements IPQRSService {
             pqrs.setCedula("No Aplica");
         }
 
+
         PQRS pqrsRadicado = pqrsRepo.save(pqrs);
 
         cambiosEstadoPQRS(pqrsRadicado, estado);
@@ -75,8 +79,8 @@ public class PQRSService implements IPQRSService {
         PQRSDTO creadoPQRS = new PQRSDTO();
         BeanUtils.copyProperties(pqrsRadicado, creadoPQRS);
 
+        emailService.sendListEmail(pqrs.getCorreo(), pqrs);
         return creadoPQRS;
-
     }
 
     /**
@@ -163,6 +167,25 @@ public class PQRSService implements IPQRSService {
                     .semillero(pqrs.getSemillero())
                     .build();
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public PQRSDTO listarPQRSporId (Integer Id){
+        PQRS pqrs = pqrsRepo.findById(Id).orElseThrow(() -> new IllegalArgumentException("PQR not found"));
+        PQRSDTO pqrsDTO = new PQRSDTO();
+        BeanUtils.copyProperties(pqrs, pqrsDTO);
+        return pqrsDTO;
+    }
+
+    @Override
+    public PQRSDTO listarByRadCode (String radCode){
+        PQRS pqrs = pqrsRepo.findByCodigoRadicado(radCode);
+        if(pqrs == null){
+            throw new IllegalArgumentException("PQR not found");
+        }
+        PQRSDTO pqrsDTO = new PQRSDTO();
+        BeanUtils.copyProperties(pqrs, pqrsDTO);
+        return pqrsDTO;
     }
 
     /**

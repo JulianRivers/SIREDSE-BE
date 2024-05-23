@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS pqrs (
                                     correo VARCHAR(255) NOT NULL,
                                     codigo_radicado VARCHAR(255) NOT NULL,
                                     titulo VARCHAR(255) NOT NULL,
-                                    descripcion VARCHAR(255) NOT NULL
+                                    descripcion TEXT NOT NULL
 );
 
 ALTER TABLE pqrs
