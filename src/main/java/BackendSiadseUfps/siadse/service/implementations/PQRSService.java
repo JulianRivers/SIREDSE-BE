@@ -79,8 +79,14 @@ public class PQRSService implements IPQRSService {
         PQRSDTO creadoPQRS = new PQRSDTO();
         BeanUtils.copyProperties(pqrsRadicado, creadoPQRS);
 
-        emailService.sendListEmail(pqrs.getCorreo(), pqrs);
+        emailService.sendListEmail(creadoPQRS, 1, "");
         return creadoPQRS;
+    }
+
+    @Override
+    public void respuestaPQRS(Integer pqrsId, String mensaje){
+        PQRSDTO pqrsDTO = listarPQRSporId(pqrsId);
+        emailService.sendListEmail(pqrsDTO, 2, mensaje);
     }
 
     /**
@@ -158,7 +164,7 @@ public class PQRSService implements IPQRSService {
                     .fechaRadicado(pqrs.getFechaRadicado())
                     .estadoRadicado(pqrs.getEstadoRadicado())
                     .correo(pqrs.getCorreo())
-                    .tiposPqrs(pqrs.getTipoPqrs())
+                    .tipoPqrs(pqrs.getTipoPqrs())
                     .anonimo(pqrs.getAnonimo())
                     .nombre(pqrs.getNombre())
                     .apellido(pqrs.getApellido())

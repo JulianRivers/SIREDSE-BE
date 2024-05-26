@@ -15,4 +15,5 @@ public interface IPQRSService {
     public PQRSDTO listarPQRSporId(Integer Id);
     public boolean eliminarPQRS (Integer pqrsID);
     public PQRSDTO listarByRadCode(String radCode);
+    public void respuestaPQRS(Integer pqrsId, String mensaje);
 }

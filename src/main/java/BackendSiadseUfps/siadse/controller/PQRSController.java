@@ -27,6 +27,12 @@ public class PQRSController {
         return ResponseEntity.ok(newPQRS);
     }
 
+    @PostMapping("/respuesta")
+    public ResponseEntity<String> respuestaPQR(@RequestBody String mensaje, @RequestParam Integer pqrsId) {
+        pqrsService.respuestaPQRS(pqrsId, mensaje);
+        return ResponseEntity.ok(mensaje);
+    }
+
     @GetMapping("/{pqrsId}")
     public ResponseEntity<PQRSDTO> listPQRbyId(@PathVariable Integer pqrsId) {
         PQRSDTO pqrsdto = new PQRSDTO();
