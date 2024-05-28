@@ -19,9 +19,9 @@ public class ConfiguracionDTO {
     @NotBlank(message = "El nombre no puede estar en blanco")
     private String nombre;
 
-    @NotNull(message = "La descripción no puede ser nulo")
-    @NotBlank(message = "La descripción no puede estar en blanco")
-    private String descripcion;
+    @NotNull(message = "La sigla no puede ser nulo")
+    @NotBlank(message = "La sigla no puede estar en blanco")
+    private String sigla;
 
     @NotNull(message = "La misión no puede ser nulo")
     @NotBlank(message = "La misión no puede estar en blanco")
@@ -31,17 +31,19 @@ public class ConfiguracionDTO {
     @NotBlank(message = "La visión no puede estar en blanco")
     private String vision;
 
-    @NotNull(message = "El departamento no puede ser nulo")
-    @NotBlank(message = "El departamento no puede estar en blanco")
-    private String departamento;
+    private String palabrasClave;
 
-    @NotNull(message = "El docente no puede ser nulo")
-    @NotBlank(message = "El docente no puede estar en blanco")
-    private String docente;
+    @NotNull(message = "El director no puede ser nulo")
+    @NotBlank(message = "El director no puede estar en blanco")
+    private String director;
 
-    @NotNull(message = "El líder no puede ser nulo")
-    @NotBlank(message = "El líder no puede estar en blanco")
-    private String lider;
+    private String whatsapp;
+
+    private String instagram;
+
+    private String facebook;
+
+    private String correo;
 
 
 
