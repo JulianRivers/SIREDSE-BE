@@ -24,17 +24,23 @@ public class Configuracion {
 
     private String nombre;
 
-    private String descripcion;
+    private String sigla;
 
     private String mision;
 
     private String vision;
 
-    private String departamento;
+    private String palabrasClave;
 
-    private String docente;
+    private String director;
 
-    private String lider;
+    private String whatsapp;
+
+    private String instagram;
+
+    private String facebook;
+
+    private String correo;
 
 
 }
