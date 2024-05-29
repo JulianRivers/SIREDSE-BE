@@ -4,6 +4,7 @@ package BackendSiadseUfps.siadse.controller;
 import BackendSiadseUfps.siadse.dto.PQRSDTO;
 import BackendSiadseUfps.siadse.models.Response;
 import BackendSiadseUfps.siadse.service.implementations.PQRSService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,26 @@ public class PQRSController {
         PQRSDTO newPQRS = pqrsService.createPQRS(pqrsDTO, tipoPQRSID);
 
         return ResponseEntity.ok(newPQRS);
+    }
+
+    @PostMapping("/respuesta")
+    public ResponseEntity<String> respuestaPQR(@RequestBody String mensaje, @RequestParam Integer pqrsId) {
+        pqrsService.respuestaPQRS(pqrsId, mensaje);
+        return ResponseEntity.ok(mensaje);
+    }
+
+    @GetMapping("/{pqrsId}")
+    public ResponseEntity<PQRSDTO> listPQRbyId(@PathVariable Integer pqrsId) {
+        PQRSDTO pqrsdto = new PQRSDTO();
+        BeanUtils.copyProperties(pqrsService.listarPQRSporId(pqrsId), pqrsdto);
+        return ResponseEntity.ok(pqrsdto);
+    }
+
+    @GetMapping("/code/{codeRad}")
+    public ResponseEntity<PQRSDTO> listPQRbyCodeRad(@PathVariable String codeRad) {
+        PQRSDTO pqrsdto = new PQRSDTO();
+        BeanUtils.copyProperties(pqrsService.listarByRadCode(codeRad), pqrsdto);
+        return ResponseEntity.ok(pqrsdto);
     }
 
     @GetMapping
