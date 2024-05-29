@@ -12,5 +12,5 @@ import BackendSiadseUfps.siadse.entity.User;
 public interface CapacitacionesRepository extends JpaRepository<User, Integer> {
 	  Optional<Capacitaciones> buscarCapacitacionesPorId(Capacitaciones integer);
 	  
-	    User buscarCapacitacionesPorId(Integer id);
+	    Capacitaciones buscarCapacitacionesPorId(Integer id);
 }
