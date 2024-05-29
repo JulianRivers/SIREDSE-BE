@@ -22,7 +22,7 @@ public class PQRSDTO {
     private Date fechaRadicado;
     private EstadosPQRS estadoRadicado;
     private String correo;
-    private TiposPQRS tiposPqrs;
+    private TiposPQRS tipoPqrs;
     private Boolean anonimo;
     private String nombre;
     private String apellido;
@@ -78,12 +78,12 @@ public class PQRSDTO {
         this.correo = correo;
     }
 
-    public TiposPQRS getTiposPqrs() {
-        return tiposPqrs;
+    public TiposPQRS getTipoPqrs() {
+        return tipoPqrs;
     }
 
-    public void setTiposPqrs(TiposPQRS tiposPqrs) {
-        this.tiposPqrs = tiposPqrs;
+    public void setTipoPqrs(TiposPQRS tiposPqrs) {
+        this.tipoPqrs = tiposPqrs;
     }
 
     public Boolean getAnonimo() {
