@@ -13,9 +13,10 @@ public interface ConfiguracionService {
     Configuracion actualizarConfiguracion(ConfiguracionDTO configuracionDTO);
     List<Configuracion> obtenerTodasLasConfiguraciones();
 
-    Optional<Configuracion> obtenerConfiguracionPorId(String id);
+    Optional<Configuracion> obtenerConfiguracionPorId(Integer id);
 
     Configuracion guardarConfiguracion(ConfiguracionDTO configuracionDTO);
 
-    void eliminarConfiguracionPorId(String id);
+    void eliminarConfiguracionPorId(Integer id);
+
 }
