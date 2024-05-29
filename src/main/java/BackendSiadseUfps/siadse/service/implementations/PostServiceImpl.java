@@ -71,6 +71,7 @@ public class PostServiceImpl  implements IPostService{
                     .link(post.getUniqueTitleId())
                     .imagen(post.getImagenEncabezado())
                     .tag(post.getTag())
+                    .uniqueTitleId(post.getUniqueTitleId())
                     .build();
         }).collect(Collectors.toList());
     }
@@ -92,6 +93,14 @@ public class PostServiceImpl  implements IPostService{
                 .imagenEncabezado(post.getImagenEncabezado())
                 .tag(post.getTag())
                 .build();
+    }
+
+    public String deletePost(Long id) {
+        Post post = postRepository.findById(id).get();
+        if (post == null)
+            throw new Error();
+        postRepository.delete(post);
+        return "Post deleted successfully";
     }
     
 }

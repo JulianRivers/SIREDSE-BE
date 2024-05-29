@@ -16,4 +16,5 @@ public class PostDTO {
     private Date fechaCreacion;
     private String tag;
     private String link;
+    private String uniqueTitleId;
 }
