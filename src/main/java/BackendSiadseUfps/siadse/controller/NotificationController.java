@@ -1,6 +1,6 @@
 package BackendSiadseUfps.siadse.controller;
 
-import BackendSiadseUfps.siadse.service.implementations.EmailService;
+import BackendSiadseUfps.siadse.service.implementations.SendEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class NotificationController {
 
     @Autowired
-    private EmailService emailService;
+    private SendEmailService emailService;
 
     @PostMapping("/email")
     public void sendEmailNotification(@RequestParam String to, @RequestParam String subject, @RequestParam String body) {
