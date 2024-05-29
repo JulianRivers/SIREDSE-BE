@@ -12,5 +12,5 @@ public interface PQRSRepo extends JpaRepository<PQRS, Integer> {
 
     List<PQRS> findByTipoPqrs (TiposPQRS tiposPqrs);
     List<PQRS> findByEstadoRadicado (EstadosPQRS estadosPQRS);
-
+    PQRS findByCodigoRadicado (String codigoRadicado);
 }

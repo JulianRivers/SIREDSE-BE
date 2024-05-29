@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 import BackendSiadseUfps.siadse.entity.Configuracion;
 
 @Repository
-public interface ConfiguracionRepository extends JpaRepository<Configuracion, String> {
+
+public interface ConfiguracionRepository extends JpaRepository<Configuracion, Integer > {
 }

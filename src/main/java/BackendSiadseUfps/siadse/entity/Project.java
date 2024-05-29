@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -20,10 +21,13 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Size(max = 30, message = "La descripción debe tener como máximo 300 caracteres")
     private String projectName;
     
+    @Size(max = 300, message = "La descripción debe tener como máximo 300 caracteres")
     private String archivo ;
     
+    @Size(max = 300, message = "La descripción debe tener como máximo 300 caracteres")
     private String imagen="no-image.png";
     
     @OneToOne
