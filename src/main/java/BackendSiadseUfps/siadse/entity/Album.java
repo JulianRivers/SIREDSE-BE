@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import java.util.Date;
 
 @Getter
@@ -21,9 +23,11 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull(message = "titulo cannot be null")
+    @Size(max = 100, message = "La descripción debe tener como máximo 300 caracteres")
+    @NotNull(message = "titulo no puede ser  null")
     private String titulo;
 
+    @Size(max = 300, message = "La descripción debe tener como máximo 300 caracteres")
     private String descripcion;
 
     private Date fechaCreacion;

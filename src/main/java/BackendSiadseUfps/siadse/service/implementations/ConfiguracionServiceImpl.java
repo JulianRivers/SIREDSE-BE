@@ -22,7 +22,8 @@ public class ConfiguracionServiceImpl implements ConfiguracionService {
     }
 
     @Override
-    public Optional<Configuracion> obtenerConfiguracionPorId(String id) {
+    public Optional<Configuracion> obtenerConfiguracionPorId(Integer id) {
+
         return configuracionRepository.findById(id);
     }
 
@@ -42,12 +43,15 @@ public class ConfiguracionServiceImpl implements ConfiguracionService {
     public Configuracion actualizarConfiguracion(ConfiguracionDTO configuracionDTO) {
         Configuracion configuracion = obtenerConfiguracionUnica();
         configuracion.setNombre(configuracionDTO.getNombre());
-        configuracion.setDescripcion(configuracionDTO.getDescripcion());
+        configuracion.setSigla(configuracionDTO.getSigla());
         configuracion.setMision(configuracionDTO.getMision());
         configuracion.setVision(configuracionDTO.getVision());
-        configuracion.setDepartamento(configuracionDTO.getDepartamento());
-        configuracion.setDocente(configuracionDTO.getDocente());
-        configuracion.setLider(configuracionDTO.getLider());
+        configuracion.setPalabrasClave(configuracionDTO.getPalabrasClave());
+        configuracion.setDirector(configuracionDTO.getDirector());
+        configuracion.setWhatsapp(configuracionDTO.getWhatsapp());
+        configuracion.getFacebook(configuracionDTO.getFacebook());
+        configuracion.getInstagram(configuracionDTO.getInstagram());
+        configuracion.getCorreo(configuracionDTO.getCorreo());
         return configuracionRepository.save(configuracion);
     }
 
@@ -55,16 +59,21 @@ public class ConfiguracionServiceImpl implements ConfiguracionService {
     public Configuracion guardarConfiguracion(ConfiguracionDTO configuracionDTO) {
         Configuracion configuracion = new Configuracion();
         configuracion.setNombre(configuracionDTO.getNombre());
-        configuracion.setDescripcion(configuracionDTO.getDescripcion());
+        configuracion.setSigla(configuracionDTO.getSigla());
         configuracion.setMision(configuracionDTO.getMision());
         configuracion.setVision(configuracionDTO.getVision());
-        configuracion.setDocente(configuracionDTO.getDocente());
-        configuracion.setLider(configuracionDTO.getLider());
+        configuracion.setPalabrasClave(configuracionDTO.getPalabrasClave());
+        configuracion.setDirector(configuracionDTO.getDirector());
+        configuracion.setWhatsapp(configuracionDTO.getWhatsapp());
+        configuracion.getFacebook(configuracionDTO.getFacebook());
+        configuracion.getInstagram(configuracionDTO.getInstagram());
+        configuracion.getCorreo(configuracionDTO.getCorreo());
         return configuracionRepository.save(configuracion);
     }
 
     @Override
-    public void eliminarConfiguracionPorId(String id) {
+
+    public void eliminarConfiguracionPorId(Integer id) {
         configuracionRepository.deleteById(id);
     }
 }

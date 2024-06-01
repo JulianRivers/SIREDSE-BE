@@ -1,6 +1,8 @@
 package BackendSiadseUfps.siadse.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+
 import lombok.Data;
 
 @Data
@@ -11,7 +13,8 @@ public class TiposPQRS {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    
+    @Size(max = 30, message = "La descripción debe tener como máximo 300 caracteres")
     private String tipo;
 
     public Integer getId() {
