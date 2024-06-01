@@ -60,7 +60,7 @@ public class ReporteController {
         userDTO.setUsername(user.getUsername());
         userDTO.setName(user.getName());
         userDTO.setEmail(user.getEmail());
-        userDTO.setPasswsirord(user.getPassword());
+        userDTO.setPassword(user.getPassword());
         userDTO.setCodigoUniversidad(user.getCodigoUniversidad());
         userDTO.setSemestreActual(user.getSemestreActual());
         userDTO.setEdad(user.getEdad());
