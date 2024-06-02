@@ -49,9 +49,9 @@ public class ConfiguracionServiceImpl implements ConfiguracionService {
         configuracion.setPalabrasClave(configuracionDTO.getPalabrasClave());
         configuracion.setDirector(configuracionDTO.getDirector());
         configuracion.setWhatsapp(configuracionDTO.getWhatsapp());
-        configuracion.getFacebook(configuracionDTO.getFacebook());
-        configuracion.getInstagram(configuracionDTO.getInstagram());
-        configuracion.getCorreo(configuracionDTO.getCorreo());
+        configuracion.setFacebook(configuracionDTO.getFacebook());
+        configuracion.setInstagram(configuracionDTO.getInstagram());
+        configuracion.setCorreo(configuracionDTO.getCorreo());
         return configuracionRepository.save(configuracion);
     }
 
@@ -65,9 +65,9 @@ public class ConfiguracionServiceImpl implements ConfiguracionService {
         configuracion.setPalabrasClave(configuracionDTO.getPalabrasClave());
         configuracion.setDirector(configuracionDTO.getDirector());
         configuracion.setWhatsapp(configuracionDTO.getWhatsapp());
-        configuracion.getFacebook(configuracionDTO.getFacebook());
-        configuracion.getInstagram(configuracionDTO.getInstagram());
-        configuracion.getCorreo(configuracionDTO.getCorreo());
+        configuracion.setFacebook(configuracionDTO.getFacebook());
+        configuracion.setInstagram(configuracionDTO.getInstagram());
+        configuracion.setCorreo(configuracionDTO.getCorreo());
         return configuracionRepository.save(configuracion);
     }
 
