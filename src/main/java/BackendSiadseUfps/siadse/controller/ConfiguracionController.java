@@ -8,11 +8,10 @@ import BackendSiadseUfps.siadse.dto.ConfiguracionDTO;
 import BackendSiadseUfps.siadse.entity.Configuracion;
 import BackendSiadseUfps.siadse.service.interfaces.ConfiguracionService;
 
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/configuracion")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ConfiguracionController {
 
     @Autowired
