@@ -11,6 +11,7 @@ import BackendSiadseUfps.siadse.service.interfaces.ConfiguracionService;
 
 @RestController
 @RequestMapping("/configuracion")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ConfiguracionController {
 
     @Autowired
