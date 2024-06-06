@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.UUID;
 @Service
 public class StorageServiceImplementation implements StorageService {
-    @Value("${media.location}")
+
     private String rootLocation;
     @Override
     public void init() {

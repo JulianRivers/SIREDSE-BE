@@ -12,4 +12,5 @@ public interface ConfiguracionRepository extends JpaRepository<Configuracion, In
 	Optional<Configuracion> findById(String id);
 	
 	void deleteById(String id);
+
 }
