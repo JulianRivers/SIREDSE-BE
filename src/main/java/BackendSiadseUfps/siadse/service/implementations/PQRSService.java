@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Servicio del controller para gestionar las operaciones relacionadas con las solicitudes PQRS.
+ */
 @Service("pqrsService")
 public class PQRSService implements IPQRSService {
 
@@ -175,6 +178,13 @@ public class PQRSService implements IPQRSService {
         }).collect(Collectors.toList());
     }
 
+    /**
+     * Método para listar el PQRS solicitado por el ID
+     * Solo utilizable por el rol de ADMINISTRADOR o DIRECTOR si lo hay
+     *
+     * @params ID del PQRS
+     * @return Lista de los PQRS.
+     */
     @Override
     public PQRSDTO listarPQRSporId (Integer Id){
         PQRS pqrs = pqrsRepo.findById(Id).orElseThrow(() -> new IllegalArgumentException("PQR not found"));
@@ -183,6 +193,13 @@ public class PQRSService implements IPQRSService {
         return pqrsDTO;
     }
 
+    /**
+     * Método para listar el PQRS solicitado por el Código de Radicado
+     * Solo utilizable por el rol de ADMINISTRADOR o DIRECTOR si lo hay
+     *
+     * @params Código de Radicado del PQRS
+     * @return Lista de los PQRS.
+     */
     @Override
     public PQRSDTO listarByRadCode (String radCode){
         PQRS pqrs = pqrsRepo.findByCodigoRadicado(radCode);

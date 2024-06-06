@@ -13,6 +13,10 @@ import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 import java.util.Date;
 
+
+/**
+ * Servicio para el envío de correos electrónicos relacionados con las PQRS.
+ */
 @Service
 @Transactional
 public class EmailService {
@@ -47,6 +51,12 @@ public class EmailService {
         }
     }
 
+    /**
+     * Genera el contenido HTML del correo electrónico de notificación de recepción de PQRS.
+     *
+     * @param pqrs  DTO de la PQRS.
+     * @return      Contenido HTML del correo.
+     */
     public String getHtml(PQRSDTO pqrs){
         String nombre = "";
         if(pqrs.getAnonimo()){
@@ -123,6 +133,13 @@ public class EmailService {
         return emailHtml;
     }
 
+    /**
+     * Genera el contenido HTML del correo electrónico de respuesta a PQRS.
+     *
+     * @param pqrs       DTO de la PQRS.
+     * @param respuesta  Respuesta al PQRS.
+     * @return           Contenido HTML del correo.
+     */
     public String getHtml2(PQRSDTO pqrs, String respuesta){
         String nombre = "";
         if(pqrs.getAnonimo()){

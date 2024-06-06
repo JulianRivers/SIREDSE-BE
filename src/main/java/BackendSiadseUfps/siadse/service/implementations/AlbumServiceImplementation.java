@@ -24,6 +24,7 @@ public class AlbumServiceImplementation implements AlbumService {
     private StorageService storageService;
     @Autowired
     private ContenidoMultimediaRepository contenidoMultimediaRepository;
+
     @Override
     public AlbumDTO createAlbum(AlbumDTO albumDTO) {
         Album album = new Album();
@@ -31,12 +32,14 @@ public class AlbumServiceImplementation implements AlbumService {
         album.setFechaCreacion(new Date());
         album.setFechaActualizacion(new Date());
         String albumFolderName = albumDTO.getTitulo();
+
         String albumFolderPath = Paths.get(storageService.getRootLocation(), albumFolderName).toString();
         try {
             Files.createDirectories(Paths.get(albumFolderPath));
         } catch (IOException e) {
             throw new RuntimeException("Error, No se creó el álbum", e);
         }
+
         album.setUbicacionAlbum(albumFolderName);
         album.setRuta(albumFolderPath);
         album = albumRepository.save(album);
@@ -44,6 +47,7 @@ public class AlbumServiceImplementation implements AlbumService {
         BeanUtils.copyProperties(album, responseDTO);
         return responseDTO;
     }
+
     @Override
     public List<Album> getAlbums() {
         return (List<Album>) albumRepository.findAll();
