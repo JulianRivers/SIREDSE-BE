@@ -11,74 +11,94 @@ import org.springframework.stereotype.Service;
 
 import BackendSiadseUfps.siadse.dto.ProjectDTO;
 import BackendSiadseUfps.siadse.entity.Project;
-
+import BackendSiadseUfps.siadse.entity.Semillero;
+import BackendSiadseUfps.siadse.entity.User;
 import BackendSiadseUfps.siadse.repository.ProjectRepository;
-
+import BackendSiadseUfps.siadse.repository.SemilleroRepository;
+import BackendSiadseUfps.siadse.repository.UserRepository;
 import BackendSiadseUfps.siadse.service.interfaces.ProjectService;
 
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
-	private final ModelMapper modelMapper;
-	@Autowired
-	private ProjectRepository projectRepository;
+    private final ModelMapper modelMapper;
+    private final ProjectRepository projectRepository;
+    private final SemilleroRepository semilleroRepository;
+    private final UserRepository userRepository;
 
-	 public ProjectServiceImpl(ModelMapper modelMapper,  ProjectRepository projectRepository ) {
-	        this.modelMapper = modelMapper;
-	        this.projectRepository=projectRepository;
-	    }
-	@Override
-	public ProjectDTO createProject(ProjectDTO projectDTO) {
-		Project project = new ModelMapper().map(projectDTO, Project.class);
-		project = projectRepository.save(project);
-		return new ModelMapper().map(project, ProjectDTO.class);
-	}
+    @Autowired
+    public ProjectServiceImpl(ModelMapper modelMapper, ProjectRepository projectRepository,
+                              SemilleroRepository semilleroRepository, UserRepository userRepository) {
+        this.modelMapper = modelMapper;
+        this.projectRepository = projectRepository;
+        this.semilleroRepository = semilleroRepository;
+        this.userRepository = userRepository;
+    }
 
-	@Override
-	public ProjectDTO getProject(Long id) {
-		Project project = projectRepository.findById(id).orElseThrow(() -> new RuntimeException("Project not found"));
-		return new ModelMapper().map(project, ProjectDTO.class);
-	}
+    @Override
+    public ProjectDTO createProject(ProjectDTO projectDTO) {
+        Project project = modelMapper.map(projectDTO, Project.class);
+        
+        // Asignar semillero existente al proyecto
+        if (projectDTO.getSemillero() != null) {
+            Semillero semillero = semilleroRepository.findById(projectDTO.getSemillero().getId())
+                    .orElseThrow(() -> new RuntimeException("Semillero no encontrado"));
+            project.setSemillero(semillero);
+        }
 
-	@Override
-	public ProjectDTO updateProject(Long id, ProjectDTO projectDTO) {
-		Project project = projectRepository.findById(id).orElseThrow(() -> new RuntimeException("Project not found"));
-		new ModelMapper().map(projectDTO, project);
-		project = projectRepository.save(project);
-		return new ModelMapper().map(project, ProjectDTO.class);
-	}
+        // Asignar líder del proyecto existente
+        if (projectDTO.getProjectLeader() != null) {
+            User projectLeader = userRepository.findById(projectDTO.getProjectLeader().getId())
+                    .orElseThrow(() -> new RuntimeException("Líder del proyecto no encontrado"));
+            project.setProjectLeader(projectLeader);
+        }
 
-	@Override
-	public void deleteProject(Long id) {
-		projectRepository.deleteById(id);
-	}
-	/*
-	 * @Override public String saveFile(MultipartFile file) { // Logic to save file
-	 * goes here return "Path_to_file"; // Return the path where the file is saved }
-	 */
+        project = projectRepository.save(project);
+        return modelMapper.map(project, ProjectDTO.class);
+    }
+
+    @Override
+    public ProjectDTO getProject(Long id) {
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Project not found"));
+        return modelMapper.map(project, ProjectDTO.class);
+    }
+
+    @Override
+    public ProjectDTO updateProject(Long id, ProjectDTO projectDTO) {
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Project not found"));
+        modelMapper.map(projectDTO, project);
+        project = projectRepository.save(project);
+        return modelMapper.map(project, ProjectDTO.class);
+    }
+
+    @Override
+    public void deleteProject(Long id) {
+        projectRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ProjectDTO> getAllProjects() {
+        List<Project> projects = projectRepository.findAll();
+        return projects.stream()
+                .map(project -> modelMapper.map(project, ProjectDTO.class))
+                .collect(Collectors.toList());
+    }
 
 	@Override
 	public void guardar(ProjectDTO projectDTO) {
-		Project project = new ModelMapper().map(projectDTO, Project.class);
-		projectRepository.save(project);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public ProjectDTO buscarPorId(Long idSolicitud) {
-		Optional<Project> optional = projectRepository.findById(idSolicitud);
-		if (optional.isPresent()) {
-			return new ModelMapper().map(optional.get(), ProjectDTO.class);
-		}
+		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public List<ProjectDTO> getAllProjects() {
-		List<Project> projects = projectRepository.findAll();
-		// Convertir la lista de proyectos a una lista de ProjectDTO
-		List<ProjectDTO> projectDTOs = projects.stream().map(project -> modelMapper.map(project, ProjectDTO.class))
-				.collect(Collectors.toList());
-		return projectDTOs;
-	}
-
+	
+	public Project findProjectByLeaderId(Integer leaderId) {
+        return projectRepository.findByProjectLeaderId(leaderId);
+    }
 }

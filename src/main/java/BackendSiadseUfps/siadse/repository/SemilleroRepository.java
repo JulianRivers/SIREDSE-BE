@@ -10,7 +10,6 @@ import BackendSiadseUfps.siadse.entity.Semillero;
 
 public interface SemilleroRepository extends JpaRepository<Semillero,Integer> {
 	Optional<Semillero> findById(SemilleroDTO semilleroDTO);
-
 	Semillero getReferenceById(Integer semilleroId);
 
 }

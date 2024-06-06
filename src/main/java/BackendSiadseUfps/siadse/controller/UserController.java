@@ -1,5 +1,7 @@
 package BackendSiadseUfps.siadse.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +59,7 @@ public class UserController {
         userService.logoutUser(user.getId()); // Implementa el método logoutUser en UserService
         return ResponseEntity.ok("Logout successful");
     }
-
+    
 
     // Método para convertir un objeto User a UserDTO
     private UserDTO convertToUserDTO(User user) {

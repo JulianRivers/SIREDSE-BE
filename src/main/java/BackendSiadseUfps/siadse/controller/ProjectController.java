@@ -20,11 +20,12 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @PostMapping
-    public ResponseEntity<ProjectDTO> createProject(@RequestBody ProjectDTO projectDTO) {
-        ProjectDTO createdProject = projectService.createProject(projectDTO);
-        return new ResponseEntity<>(createdProject, HttpStatus.CREATED);
-    }
+	
+	  @PostMapping public ResponseEntity<ProjectDTO> createProject(@RequestBody
+	  ProjectDTO projectDTO) { ProjectDTO createdProject =
+	  projectService.createProject(projectDTO); return new
+	  ResponseEntity<>(createdProject, HttpStatus.CREATED);
+	 }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProjectDTO> getProject(@PathVariable Long id) {

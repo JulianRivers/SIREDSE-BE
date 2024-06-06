@@ -65,5 +65,8 @@ public class UserService {
         user.setLoggedIn(false); // Marcar al usuario como no autenticado
         userRepository.save(user);
     }
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 
 }
