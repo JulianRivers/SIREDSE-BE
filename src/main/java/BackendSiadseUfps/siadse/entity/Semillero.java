@@ -1,6 +1,5 @@
 package BackendSiadseUfps.siadse.entity;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,37 +26,30 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "semillero")
 public class Semillero {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	
-	@Size(max = 30, message = "La descripción debe tener como máximo 300 caracteres")
-	private String nombre;
-	
-	@Size(max = 300, message = "La descripción debe tener como máximo 300 caracteres")
-	private String descripcion;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    
+    @Size(max = 30, message = "El nombre debe tener como máximo 30 caracteres")
+    private String nombre;
+    
+    @Size(max = 300, message = "La descripción debe tener como máximo 300 caracteres")
+    private String descripcion;
 
-	private Date fechaCreacion;
+    private String codigo; // Asegúrate de que el código sea String si es alfanumérico
 
-	private Date fechaActualizacion;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "director_id", referencedColumnName = "id")
+    private User director;
 
-	private Integer Codigo;
+    @OneToMany(mappedBy = "semillero")
+    private Set<Project> projects;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "director_id", referencedColumnName = "id")
-	private User director; // Asume un User con roleId = 2 para directores
-
-	@OneToMany(mappedBy = "semillero")
-	private Set<Project> projects;
-
-       @ManyToMany
+    @ManyToMany
     @JoinTable(
         name = "semillero_miembros",
         joinColumns = @JoinColumn(name = "semillero_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> miembros = new HashSet<>();
-
-   
-
 }

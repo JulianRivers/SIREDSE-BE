@@ -1,8 +1,6 @@
 package BackendSiadseUfps.siadse.service.implementations;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -23,19 +21,17 @@ import BackendSiadseUfps.siadse.service.interfaces.SemilleroService;
 @Service
 public class SemilleroServiceImpl implements SemilleroService {
 
-    private final ModelMapper modelMapper;
     @Autowired
     private SemilleroRepository semilleroRepository;
+
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private ProjectRepository projectRepository;
 
-    public SemilleroServiceImpl(ModelMapper modelMapper, SemilleroRepository semilleroRepository, UserRepository userRepository) {
-        this.modelMapper = modelMapper;
-        this.semilleroRepository = semilleroRepository;
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
     public SemilleroDTO crearSemillero(SemilleroDTO semilleroDTO) {
@@ -57,11 +53,11 @@ public class SemilleroServiceImpl implements SemilleroService {
 
     @Override
     public ProjectDTO addProjectToSemillero(ProjectDTO projectDTO) {
-        Project project = new Project();
-        project.setProjectName(projectDTO.getProjectName());
-        project.setProjectLeader(userRepository.findById(projectDTO.getProjectLeader()).orElseThrow());
-        project.setSemillero(semilleroRepository.findById(projectDTO.getSemillero()).orElseThrow());
-        projectRepository.save(project);
+        Project project = modelMapper.map(projectDTO, Project.class);
+        Semillero semillero = semilleroRepository.findById(projectDTO.getSemillero().getId())
+                .orElseThrow(() -> new RuntimeException("Semillero no encontrado"));
+        project.setSemillero(semillero);
+        project = projectRepository.save(project);
         return modelMapper.map(project, ProjectDTO.class);
     }
 
@@ -75,40 +71,23 @@ public class SemilleroServiceImpl implements SemilleroService {
 
     @Override
     public SemilleroDTO getSeedbedId(Integer id) {
-        Optional<Semillero> optionalSemillero = semilleroRepository.findById(id);
-        return optionalSemillero.map(semillero -> modelMapper.map(semillero, SemilleroDTO.class))
-                .orElse(null);
+        Semillero semillero = semilleroRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Semillero no encontrado"));
+        return modelMapper.map(semillero, SemilleroDTO.class);
     }
 
     @Override
     public SemilleroDTO updateSeedbed(Integer id, SemilleroDTO seedbedDTO) {
-        Optional<Semillero> optionalSemillero = semilleroRepository.findById(id);
-        if (optionalSemillero.isPresent()) {
-            Semillero semillero = optionalSemillero.get();
-            semillero.setNombre(seedbedDTO.getNombre());
-            semillero.setDescripcion(seedbedDTO.getDescripcion());
-            semillero.setFechaActualizacion(new Date());
-            semilleroRepository.save(semillero);
-            return modelMapper.map(semillero, SemilleroDTO.class);
-        } else {
-            return null;
-        }
+        Semillero semillero = semilleroRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Semillero no encontrado"));
+        modelMapper.map(seedbedDTO, semillero);
+        semillero = semilleroRepository.save(semillero);
+        return modelMapper.map(semillero, SemilleroDTO.class);
     }
 
     @Override
     public void deleteSeedbed(Integer id) {
-        if (semilleroRepository.existsById(id)) {
-            semilleroRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("Semillero not found");
-        }
-    }
-
-    @Override
-    public SemilleroDTO getSemillero(Integer semilleroId) {
-        Semillero semillero = semilleroRepository.findById(semilleroId)
-                .orElseThrow(() -> new RuntimeException("Semillero not found"));
-        return new ModelMapper().map(semillero, SemilleroDTO.class);
+        semilleroRepository.deleteById(id);
     }
 
     @Override
@@ -126,12 +105,11 @@ public class SemilleroServiceImpl implements SemilleroService {
     }
 
     @Override
-public List<UserDTO> getMiembros(Integer semilleroId) {
-    Semillero semillero = semilleroRepository.findById(semilleroId)
-            .orElseThrow(() -> new RuntimeException("Semillero no encontrado"));
-    return semillero.getMiembros().stream()
-            .map(user -> modelMapper.map(user, UserDTO.class))
-            .collect(Collectors.toList());
-}
-
+    public List<UserDTO> getMiembros(Integer semilleroId) {
+        Semillero semillero = semilleroRepository.findById(semilleroId)
+                .orElseThrow(() -> new RuntimeException("Semillero no encontrado"));
+        return semillero.getMiembros().stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .collect(Collectors.toList());
+    }
 }

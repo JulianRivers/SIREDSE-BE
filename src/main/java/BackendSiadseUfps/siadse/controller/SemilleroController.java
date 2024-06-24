@@ -1,16 +1,24 @@
 package BackendSiadseUfps.siadse.controller;
 
-import BackendSiadseUfps.siadse.dto.ProjectDTO;
-import BackendSiadseUfps.siadse.dto.SemilleroDTO;
-import BackendSiadseUfps.siadse.dto.UserDTO;
-import BackendSiadseUfps.siadse.service.interfaces.SemilleroService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import BackendSiadseUfps.siadse.dto.InscripcionDTO;
+import BackendSiadseUfps.siadse.dto.ProjectDTO;
+import BackendSiadseUfps.siadse.dto.SemilleroDTO;
+import BackendSiadseUfps.siadse.service.interfaces.SemilleroService;
 
 @RestController
 @RequestMapping("/api/semilleros")
@@ -36,7 +44,7 @@ public class SemilleroController {
     @Secured({"ROLE_ADMIN", "ROLE_DIRECTOR"})
     @PostMapping("/{semilleroId}/projects")
     public ResponseEntity<ProjectDTO> addProject(@PathVariable Integer semilleroId, @RequestBody ProjectDTO projectDTO) {
-        SemilleroDTO semilleroDTO = semilleroService.getSemillero(semilleroId);
+        SemilleroDTO semilleroDTO = semilleroService.getSeedbedId(semilleroId);
         if (semilleroDTO == null) {
             return ResponseEntity.notFound().build();
         }
@@ -81,13 +89,14 @@ public class SemilleroController {
         }
     }
 
-    @PostMapping("/{id}/inscribirse")
-    public ResponseEntity<String> inscribirse(@PathVariable Integer id, @RequestParam String codigo, @RequestBody UserDTO userDTO) {
-        boolean inscrito = semilleroService.inscribirse(id, codigo, userDTO);
-        if (inscrito) {
-            return ResponseEntity.ok("Inscripción exitosa");
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Inscripción fallida");
-        }
+   @PostMapping("/{id}/inscribirse")
+public ResponseEntity<String> inscribirse(@PathVariable Integer id, @RequestBody InscripcionDTO inscripcionDTO) {
+    boolean inscrito = semilleroService.inscribirse(id, inscripcionDTO.getCodigo(), inscripcionDTO.getUserDTO());
+    if (inscrito) {
+        return ResponseEntity.ok("Inscripción exitosa");
+    } else {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Inscripción fallida");
     }
+}
+
 }

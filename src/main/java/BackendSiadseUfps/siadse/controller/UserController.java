@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,13 +44,17 @@ public class UserController {
 
     @Autowired
     private JwtUtil jwtUtil;
-
+    
+    @Transactional
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<String> registerUser(@RequestBody UserDTO userDTO) {
         User user = userService.registerUser(userDTO);
-        return ResponseEntity.ok(user);
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
+        final String jwt = jwtUtil.generateToken(userDetails);
+        return ResponseEntity.ok(jwt);
     }
 
+    @Transactional
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody Map<String, String> loginData) {
         String email = loginData.get("email");
@@ -57,11 +62,14 @@ public class UserController {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, password)
         );
+        User user = userRepository.findByEmail(email);
+        userService.loginUser(user);
         final UserDetails userDetails = userDetailsService.loadUserByUsername(email);
         final String jwt = jwtUtil.generateToken(userDetails);
         return ResponseEntity.ok(jwt);
     }
 
+    @Transactional
     @GetMapping("/info")
     public ResponseEntity<UserDTO> getUserInfo(@RequestParam String email) {
         User user = userRepository.findByEmail(email);
@@ -72,6 +80,7 @@ public class UserController {
         return ResponseEntity.ok(userDTO);
     }
 
+    @Transactional
     @PostMapping("/logout")
     public ResponseEntity<String> logoutUser(HttpServletRequest request) {
         String token = request.getHeader("Authorization").substring(7); // Remove "Bearer " prefix

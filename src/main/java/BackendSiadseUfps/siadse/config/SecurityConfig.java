@@ -35,7 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/api/users/register", "/api/users/login").permitAll()
             .antMatchers("/api/semilleros/**").hasAnyRole("ADMIN", "DIRECTOR")
-            .antMatchers("/api/semilleros/{id}/inscribirse").hasRole("USER")
             .anyRequest().authenticated()
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

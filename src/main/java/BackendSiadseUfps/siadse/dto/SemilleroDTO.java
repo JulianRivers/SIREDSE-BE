@@ -1,7 +1,5 @@
 package BackendSiadseUfps.siadse.dto;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -13,15 +11,9 @@ import lombok.NoArgsConstructor;
 @Data
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class SemilleroDTO {
-
     private Integer id;
     private String nombre;
     private String descripcion;
-    private Date fechaCreacion;
-    private Date fechaActualizacion;
+    private String codigo; // Asegúrate de que el DTO también tenga el campo "codigo"
     private DirectorDTO director;
-
-    // Si tienes más campos que añadir, hazlo aquí
-
-    // Si necesitas algún comportamiento adicional, puedes añadir métodos aquí
 }

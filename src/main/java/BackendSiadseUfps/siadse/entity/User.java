@@ -3,7 +3,15 @@ package BackendSiadseUfps.siadse.entity;
 import java.util.Collection;
 import java.util.Collections;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
@@ -60,18 +68,22 @@ public class User implements UserDetails {
     @Pattern(regexp = "\\d{10}", message = "El número de celular debe tener 10 dígitos")
     private String celular;
     
+    
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
     
     @Column(name = "logged_in")
     private boolean loggedIn;
 
+    @Column(name = "token")
+    private String token;
+
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(role.getName()));
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.getName()));
     }
 
     @Override
@@ -97,4 +109,9 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
 }

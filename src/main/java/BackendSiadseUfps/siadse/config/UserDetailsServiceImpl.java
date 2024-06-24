@@ -2,13 +2,14 @@ package BackendSiadseUfps.siadse.config;
 
 
 
-import BackendSiadseUfps.siadse.entity.User;
-import BackendSiadseUfps.siadse.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import BackendSiadseUfps.siadse.entity.User;
+import BackendSiadseUfps.siadse.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -22,6 +23,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
+        System.out.println("User: " + user.getEmail() + ", Roles: " + user.getAuthorities());
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), user.getAuthorities());
     }
 }
+    
