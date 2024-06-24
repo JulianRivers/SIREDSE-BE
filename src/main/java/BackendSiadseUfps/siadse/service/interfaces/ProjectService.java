@@ -1,14 +1,8 @@
 package BackendSiadseUfps.siadse.service.interfaces;
 
-
-
 import java.util.List;
 
 import BackendSiadseUfps.siadse.dto.ProjectDTO;
-
-
-
-
 
 public interface ProjectService {
 	void  guardar(ProjectDTO projectDTO);

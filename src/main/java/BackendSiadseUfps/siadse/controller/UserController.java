@@ -1,11 +1,24 @@
 package BackendSiadseUfps.siadse.controller;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import BackendSiadseUfps.siadse.dto.LoginDTO;
+import BackendSiadseUfps.siadse.config.JwtUtil;
 import BackendSiadseUfps.siadse.dto.RoleDTO;
 import BackendSiadseUfps.siadse.dto.UserDTO;
 import BackendSiadseUfps.siadse.entity.User;
@@ -22,6 +35,15 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private JwtUtil jwtUtil;
+
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody UserDTO userDTO) {
         User user = userService.registerUser(userDTO);
@@ -29,13 +51,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody LoginDTO loginDTO) {
-        boolean isAuthentic = userService.loginUser(loginDTO);
-        if (isAuthentic) {
-            return ResponseEntity.ok("Login successful");
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-        }
+    public ResponseEntity<String> loginUser(@RequestBody Map<String, String> loginData) {
+        String email = loginData.get("email");
+        String password = loginData.get("password");
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(email, password)
+        );
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+        final String jwt = jwtUtil.generateToken(userDetails);
+        return ResponseEntity.ok(jwt);
     }
 
     @GetMapping("/info")
@@ -49,15 +73,11 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logoutUser(@RequestParam String email) {
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
-        }
-        userService.logoutUser(user.getId()); // Implementa el método logoutUser en UserService
+    public ResponseEntity<String> logoutUser(HttpServletRequest request) {
+        String token = request.getHeader("Authorization").substring(7); // Remove "Bearer " prefix
+        userService.logoutUser(token);
         return ResponseEntity.ok("Logout successful");
     }
-
 
     // Método para convertir un objeto User a UserDTO
     private UserDTO convertToUserDTO(User user) {
@@ -71,7 +91,6 @@ public class UserController {
         userDTO.setEdad(user.getEdad());
         userDTO.setDireccionResidencia(user.getDireccionResidencia());
         userDTO.setCelular(user.getCelular());
-        // Asigna el rol si está presente en el usuario
         if (user.getRole() != null) {
             userDTO.setRole(new RoleDTO(user.getRole().getId(), user.getRole().getName()));
         }

@@ -1,9 +1,8 @@
 package BackendSiadseUfps.siadse.service.interfaces;
 
+import java.util.List;
 
 import BackendSiadseUfps.siadse.dto.PQRSDTO;
-
-import java.util.List;
 
 public interface IPQRSService {
 

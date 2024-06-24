@@ -1,24 +1,24 @@
 package BackendSiadseUfps.siadse.service.implementations;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import BackendSiadseUfps.siadse.dto.ProjectDTO;
 import BackendSiadseUfps.siadse.dto.SemilleroDTO;
+import BackendSiadseUfps.siadse.dto.UserDTO;
 import BackendSiadseUfps.siadse.entity.Project;
 import BackendSiadseUfps.siadse.entity.Semillero;
 import BackendSiadseUfps.siadse.entity.User;
 import BackendSiadseUfps.siadse.repository.ProjectRepository;
 import BackendSiadseUfps.siadse.repository.SemilleroRepository;
 import BackendSiadseUfps.siadse.repository.UserRepository;
-import BackendSiadseUfps.siadse.service.interfaces.*;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import BackendSiadseUfps.siadse.service.interfaces.SemilleroService;
 
 @Service
 public class SemilleroServiceImpl implements SemilleroService {
@@ -30,7 +30,6 @@ public class SemilleroServiceImpl implements SemilleroService {
     private UserRepository userRepository;
     @Autowired
     private ProjectRepository projectRepository;
-
 
     public SemilleroServiceImpl(ModelMapper modelMapper, SemilleroRepository semilleroRepository, UserRepository userRepository) {
         this.modelMapper = modelMapper;
@@ -44,6 +43,7 @@ public class SemilleroServiceImpl implements SemilleroService {
         semillero = semilleroRepository.save(semillero);
         return modelMapper.map(semillero, SemilleroDTO.class);
     }
+
     @Override
     public SemilleroDTO asignarDirector(Integer semilleroId, Integer directorId) {
         Semillero semillero = semilleroRepository.findById(semilleroId)
@@ -54,6 +54,7 @@ public class SemilleroServiceImpl implements SemilleroService {
         semillero = semilleroRepository.save(semillero);
         return modelMapper.map(semillero, SemilleroDTO.class);
     }
+
     @Override
     public ProjectDTO addProjectToSemillero(ProjectDTO projectDTO) {
         Project project = new Project();
@@ -94,7 +95,6 @@ public class SemilleroServiceImpl implements SemilleroService {
         }
     }
 
-
     @Override
     public void deleteSeedbed(Integer id) {
         if (semilleroRepository.existsById(id)) {
@@ -103,6 +103,7 @@ public class SemilleroServiceImpl implements SemilleroService {
             throw new RuntimeException("Semillero not found");
         }
     }
+
     @Override
     public SemilleroDTO getSemillero(Integer semilleroId) {
         Semillero semillero = semilleroRepository.findById(semilleroId)
@@ -110,5 +111,27 @@ public class SemilleroServiceImpl implements SemilleroService {
         return new ModelMapper().map(semillero, SemilleroDTO.class);
     }
 
+    @Override
+    public boolean inscribirse(Integer semilleroId, String codigo, UserDTO userDTO) {
+        Semillero semillero = semilleroRepository.findById(semilleroId)
+                .orElseThrow(() -> new RuntimeException("Semillero no encontrado"));
+        if (!semillero.getCodigo().equals(codigo)) {
+            return false; // Código incorrecto
+        }
+        User user = userRepository.findById(userDTO.getId())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        semillero.getMiembros().add(user);
+        semilleroRepository.save(semillero);
+        return true;
+    }
+
+    @Override
+public List<UserDTO> getMiembros(Integer semilleroId) {
+    Semillero semillero = semilleroRepository.findById(semilleroId)
+            .orElseThrow(() -> new RuntimeException("Semillero no encontrado"));
+    return semillero.getMiembros().stream()
+            .map(user -> modelMapper.map(user, UserDTO.class))
+            .collect(Collectors.toList());
+}
 
 }
