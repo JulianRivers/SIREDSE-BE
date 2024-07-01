@@ -6,4 +6,6 @@ import BackendSiadseUfps.siadse.entity.Categoria;
 
 public interface CategoriasRepository extends JpaRepository<Categoria, Integer> {
 	
+	
+	
 }

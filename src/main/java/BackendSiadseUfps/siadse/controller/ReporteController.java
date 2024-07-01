@@ -6,17 +6,29 @@ import BackendSiadseUfps.siadse.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.web.bind.annotation.*;
+
 
 import BackendSiadseUfps.siadse.dto.RoleDTO;
 import BackendSiadseUfps.siadse.dto.UserDTO;
 import BackendSiadseUfps.siadse.entity.User;
 import BackendSiadseUfps.siadse.repository.UserRepository;
 
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/reportes")
 public class ReporteController {
@@ -25,13 +37,10 @@ public class ReporteController {
     private UserRepository userRepository;
 
     @GetMapping("/users")
-    public ResponseEntity<UserDTO> getUserInfo(@RequestParam String email) {
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-        UserDTO userDTO = convertToUserDTO(user);
-        return ResponseEntity.ok(userDTO);
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDTO> userDTOs = users.stream().map(this::convertToUserDTO).collect(Collectors.toList());
+        return ResponseEntity.ok(userDTOs);
     }
 
    /* @GetMapping("/enrolled-students")
@@ -55,6 +64,7 @@ public class ReporteController {
 
 
 
+
     private UserDTO convertToUserDTO(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setUsername(user.getUsername());
@@ -67,7 +77,6 @@ public class ReporteController {
         userDTO.setDireccionResidencia(user.getDireccionResidencia());
         userDTO.setCelular(user.getCelular());
 
-        // Asigna el rol si está presente en el usuario
         if (user.getRole() != null) {
             userDTO.setRole(new RoleDTO(user.getRole().getId(), user.getRole().getName()));
         }
