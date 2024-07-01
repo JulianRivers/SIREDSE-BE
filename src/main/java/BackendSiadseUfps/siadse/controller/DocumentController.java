@@ -23,6 +23,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 import org.modelmapper.ModelMapper;
 
+import BackendSiadseUfps.siadse.dto.DocumentRequest;
 import BackendSiadseUfps.siadse.dto.ProjectDTO;
 import BackendSiadseUfps.siadse.entity.Formato14;
 import BackendSiadseUfps.siadse.entity.Project;
@@ -55,47 +56,38 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.Optional;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/documents")
 public class DocumentController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(DocumentController.class);
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private ProjectService projectService;
-
-    @GetMapping("/generate-document")
-    public ResponseEntity<ByteArrayResource> generateDocument(@RequestParam String email) {
+    @PostMapping("/generate-document")
+    public ResponseEntity<ByteArrayResource> generateDocument(@RequestBody DocumentRequest documentRequest) {
         try {
-            logger.info("Generating document for email: {}", email);
-
-            User user = userService.findByEmail(email);
-            if (user == null) {
-                logger.error("User not found for email: {}", email);
-                return ResponseEntity.notFound().build();
-            }
-
-            Project project = projectService.findProjectByLeaderId(user.getId());
-            if (project == null) {
-                logger.error("Project not found for user id: {}", user.getId());
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-            }
-            
-            Semillero semillero = project.getSemillero();
-            if (semillero == null) {
-                logger.error("Semillero not found for project id: {}", project.getId());
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-            }
-
+            // Cargar la plantilla
             XWPFDocument document = loadTemplate("classpath:documentos/FO-IN-14.docx");
-            replacePlaceholder(document, user, project, semillero);
+            replacePlaceholder(document, documentRequest);
 
+            // Escribir el documento en un ByteArrayOutputStream
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             document.write(outputStream);
 
+            // Crear el recurso para la respuesta
             ByteArrayResource resource = new ByteArrayResource(outputStream.toByteArray());
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=proyecto.docx")
@@ -103,7 +95,7 @@ public class DocumentController {
                     .contentLength(outputStream.size())
                     .body(resource);
         } catch (Exception e) {
-            logger.error("Error generating document", e);
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
@@ -115,19 +107,19 @@ public class DocumentController {
         }
     }
 
-    private void replacePlaceholder(XWPFDocument document, User user, Project project, Semillero semillero) {
+    private void replacePlaceholder(XWPFDocument document, DocumentRequest documentRequest) {
         for (XWPFTable table : document.getTables()) {
             for (XWPFTableRow row : table.getRows()) {
                 for (XWPFTableCell cell : row.getTableCells()) {
                     for (XWPFParagraph paragraph : cell.getParagraphs()) {
-                        replaceInParagraph(paragraph, user, project, semillero);
+                        replaceInParagraph(paragraph, documentRequest);
                     }
                 }
             }
         }
     }
 
-    private void replaceInParagraph(XWPFParagraph paragraph, User user, Project project, Semillero semillero) {
+    private void replaceInParagraph(XWPFParagraph paragraph, DocumentRequest documentRequest) {
         List<XWPFRun> runs = paragraph.getRuns();
         if (runs != null) {
             StringBuilder paragraphTextBuilder = new StringBuilder();
@@ -135,8 +127,8 @@ public class DocumentController {
                 paragraphTextBuilder.append(run.getText(0));
             }
             String paragraphText = paragraphTextBuilder.toString();
-            
-         // Obtener el año actual y el semestre
+
+            // Obtener el año actual y el semestre
             LocalDate currentDate = LocalDate.now();
             int currentYear = currentDate.getYear();
             String semestre;
@@ -146,17 +138,16 @@ public class DocumentController {
             } else {
                 semestre = "II";
             }
-            
+
             String replacedText = paragraphText
-                    .replace("{{NOMBRE_PROYECTO}}", project.getProjectName())
-                    .replace("{{NOMBRE_ESTUDIANTE}}", user.getName())
-                    .replace("{{NOMBRE_SEMILLERO}}", semillero.getNombre())
-                    .replace("{{EMAIL}}", semillero.getDirector().getEmail())
-                    .replace("{{CELULAR}}", semillero.getDirector().getCelular())
-                    .replace("{{DIRECTOR}}", semillero.getDirector().getName())
+                    .replace("{{NOMBRE_PROYECTO}}", documentRequest.getProjectName())
+                    .replace("{{NOMBRE_ESTUDIANTE}}", documentRequest.getStudentName())
+                    .replace("{{NOMBRE_SEMILLERO}}", documentRequest.getSemilleroName())
+                    .replace("{{EMAIL}}", documentRequest.getDirectorEmail())
+                    .replace("{{CELULAR}}", documentRequest.getDirectorPhone())
+                    .replace("{{DIRECTOR}}", documentRequest.getDirectorName())
                     .replace("{{ANIO}}", String.valueOf(currentYear))
-                    .replace("{{SEMESTRE}}", "aaaaa");
-                    
+                    .replace("{{SEMESTRE}}", semestre);
 
             for (int i = 0; i < runs.size(); i++) {
                 if (i == 0) {
@@ -167,5 +158,4 @@ public class DocumentController {
             }
         }
     }
-	 
 }
